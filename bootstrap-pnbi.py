@@ -309,6 +309,11 @@ following components will be installed:
 
 >>> PRESS RETURN TO CONINUE""".format(version=VERSION, username=USERNAME))
 
+try:
+    input = raw_input
+except NameError:
+    pass
+
 input()
 
 WD = tempfile.mkdtemp()
