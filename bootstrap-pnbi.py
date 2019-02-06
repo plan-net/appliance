@@ -240,7 +240,7 @@ AutomaticLogin={username:s}
 [debug]
 """.format(username=USERNAME)
 SSH_CONFIG = """
-Host pnbi_*
+Host *
     AddKeysToAgent yes
     IdentityFile ~/.ssh/id_rsa
 """
