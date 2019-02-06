@@ -238,7 +238,7 @@ AutomaticLogin={username:s}
 [chooser]
 
 [debug]
-"""
+""".format(username=USERNAME)
 SSH_CONFIG = """
 Host pnbi_*
     AddKeysToAgent yes
