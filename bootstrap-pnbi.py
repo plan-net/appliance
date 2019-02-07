@@ -17,7 +17,7 @@ else:
 VERSION = "0.1"  # used for config version (future)
 PACKAGES = "linux-headers-amd64 gcc make perl sudo tmux screen git curl " \
            "wget mc htop gimp runit runit-systemd zsh python3-venv " \
-           "libgconf-2-4"
+           "libgconf-2-4 python3-dev build-essential"
 ROBO3T = "robo3t-1.2.1-linux-x86_64-3e50a65"
 PYCHARM = "pycharm-community-2018.3.4"
 CONDA_PACKAGES = "pandas anaconda-navigator rstudio jupyterlab pymongo " \
@@ -554,13 +554,10 @@ merge("/etc/gdm3/daemon.conf", GDM)
 os.chdir(CURDIR)
 call(["rm", "-R", "-f", WD])
 
-print("")
-t = 10
-while t > 0:
-    sys.stdout.write("\rreboot in ... {:d} ".format(t))
-    sys.stdout.flush()
-    time.sleep(1)
-    t -= 1
-
 title("done.")
+print("")
+print("To finish the setup you need to reboot\n\n"
+      ">>> PRESS RETURN TO CONINUE (press CTRL+C to stop)")
+input()
+
 call(["reboot"])
