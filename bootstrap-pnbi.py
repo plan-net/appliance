@@ -249,7 +249,6 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_C4() {
     echo ""
 }
-
 POWERLEVEL9K_CUSTOM_C4="ZSH_C4"
 POWERLEVEL9K_CUSTOM_C4_FOREGROUND="yellow"
 POWERLEVEL9K_CUSTOM_C4_BACKGROUND="black"
@@ -550,9 +549,8 @@ if not os.path.exists("/home/" + USERNAME + "/.oh-my-zsh"):
                 "/home/" + USERNAME + "/.zshrc"])
     check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
                 "/home/" + USERNAME + "/.oh-my-zsh"])
-    check_call(["su", USERNAME, "-c", "chsh -s /bin/zsh"])
+    check_call(["usermod", "--shell", "/usr/bin/zsh", USERNAME])
     merge("/home/" + USERNAME + "/.zshrc", ZSH_CONFIG)
-
 
 # ########################################################################### #
 # auto login
