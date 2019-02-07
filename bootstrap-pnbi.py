@@ -594,6 +594,7 @@ if not os.path.exists(home("/powerlevel9k/.core4_installed")):
         os.makedirs(home("/.config/fontconfig/conf.d/"))
     check_call(["mv", "10-powerline-symbols.conf",
                 home("/.config/fontconfig/conf.d/")])
+    open(home("/powerlevel9k/.core4_installed"), "w").write(VERSION)
 
 # ########################################################################### #
 # auto login
