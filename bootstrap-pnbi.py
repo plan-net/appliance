@@ -582,6 +582,8 @@ if not os.path.exists(home("/powerlevel9k/.core4_installed")):
         check_call(["rm", "-R", "-f", "-v", home("/powerlevel9k")])
     check_call(["git", "clone", "https://github.com/bhilburn/powerlevel9k.git",
                 home("/powerlevel9k")])
+    check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
+                home("/powerlevel9k")])
     check_call(["wget", "https://github.com/powerline/powerline/raw/develop"
                         "/font/PowerlineSymbols.otf"])
     check_call(["wget", "https://github.com/powerline/powerline/raw/develop"
@@ -594,6 +596,10 @@ if not os.path.exists(home("/powerlevel9k/.core4_installed")):
         os.makedirs(home("/.config/fontconfig/conf.d/"))
     check_call(["mv", "10-powerline-symbols.conf",
                 home("/.config/fontconfig/conf.d/")])
+    check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
+                home("/.local/share/fonts")])
+    check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
+                home("/.config/fontconfig/conf.d")])
     open(home("/powerlevel9k/.core4_installed"), "w").write(VERSION)
 
 # ########################################################################### #
