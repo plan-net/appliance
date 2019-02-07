@@ -5,8 +5,9 @@ import os
 import re
 import sys
 import tempfile
-import time
 from subprocess import call, check_call, Popen, PIPE
+
+import time
 
 CURDIR = os.path.abspath(os.curdir)
 if len(sys.argv) > 1:
@@ -14,7 +15,7 @@ if len(sys.argv) > 1:
 else:
     USERNAME = os.getlogin()
 
-VERSION = "0.1"  # used for config version (future)
+VERSION = "0.2"  # used for config version (future)
 PACKAGES = "linux-headers-amd64 gcc make perl sudo tmux screen git curl " \
            "wget mc htop gimp runit runit-systemd zsh python3-venv " \
            "libgconf-2-4 python3-dev build-essential"
@@ -245,6 +246,7 @@ Host *
     IdentityFile ~/.ssh/id_rsa
 """
 ZSH_CONFIG = """
+source  ~/powerlevel9k/powerlevel9k.zsh-theme
 ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_C4() {
     echo ""
@@ -256,6 +258,7 @@ POWERLEVEL9K_CUSTOM_C4_BACKGROUND="black"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs c4)
 """
 
+
 def title(t):
     print("")
     print("%s %s %s" % ("*" * 3, " " * len(t), "*" * 3))
@@ -266,17 +269,27 @@ def title(t):
 def merge(filename, update):
     start = "# START: CORE4-BOOTSTRAP " + VERSION
     end = "# END: CORE4-BOOTSTRAP " + VERSION
-    body = open(filename, "r").read()
-    part1 = re.split("^\# START: CORE4\-BOOTSTRAP.+?\n+", body,
-                     flags=re.DOTALL + re.MULTILINE)
-    part2 = re.split("^\# END: CORE4\-BOOTSTRAP.+?\n+", body,
-                     flags=re.DOTALL + re.MULTILINE)
-    update = "\n\n" + start + "\n\n" + update.strip() + "\n\n" + end + "\n\n"
-    if len(part2) == 2:
-        mod = part2[1].strip()
+    if os.path.exists(filename):
+        body = open(filename, "r").read()
+        part1 = re.split("^\# START: CORE4\-BOOTSTRAP.+?\n+", body,
+                         flags=re.DOTALL + re.MULTILINE)
+        part2 = re.split("^\# END: CORE4\-BOOTSTRAP.+?\n+", body,
+                         flags=re.DOTALL + re.MULTILINE)
+        update = "\n\n" + start + "\n\n" + update.strip() + "\n\n" + end + "\n\n"
+        if len(part2) == 2:
+            mod = part2[1].strip()
+        else:
+            mod = ""
+        open(filename, "w").write(part1[0].strip() + update + mod)
     else:
-        mod = ""
-    open(filename, "w").write(part1[0].strip() + update + mod)
+        update = start + "\n\n" + update.strip() + "\n\n" + end + "\n"
+        open(filename, "w").write(update)
+
+
+def home(path):
+    if not path.startswith("/"):
+        path = "/" + path
+    return "/home/" + USERNAME + path
 
 
 if os.geteuid() != 0:
@@ -308,6 +321,7 @@ following components will be installed:
     * tmux and screen terminal window manager
     * git
     * curl, wget, htop, runit, mc
+    * zsh and powerlevel9k shell extension
     * Gimp 
     * Robo3T (AKA Robomongo)
     * Pycharm community edition
@@ -526,35 +540,58 @@ for desk, body in DESKTOP.items():
 
 title("gnome 3 settings")
 open("settings", "w").write(GNOME)
-os.system('su mra -c "/usr/bin/dconf load / < settings"')
+os.system('su ' + USERNAME + ' -c "/usr/bin/dconf load / < settings"')
+
+# ########################################################################### #
+# ssh config
+# ########################################################################### #
+
+title("ssh config")
+merge(home("/.ssh/config"), SSH_CONFIG)
 
 # ########################################################################### #
 # zsh shell
 # ########################################################################### #
 
-if not os.path.exists("/home/" + USERNAME + "/.oh-my-zsh/.core4_installed"):
+if not os.path.exists(home("/.oh-my-zsh/.core4_installed")):
     title("zsh shell")
-    if os.path.exists("/home/" + USERNAME + "/.oh-my-zsh"):
-        check_call(["rm", "-R", "-f", "-v",
-                    "/home/" + USERNAME + "/.oh-my-zsh"])
-    if os.path.exists("/home/" + USERNAME + "/.zshrc"):
-        check_call(["rm", "-R", "-f", "-v",
-                    "/home/" + USERNAME + "/.zshrc"])
+    if os.path.exists(home("/.oh-my-zsh")):
+        check_call(["rm", "-R", "-f", "-v", home("/.oh-my-zsh")])
+    if os.path.exists(home("/.zshrc")):
+        check_call(["rm", "-R", "-f", "-v", home("/.zshrc")])
     check_call(["git", "clone",
                 "https://github.com/robbyrussell/oh-my-zsh.git",
-                "/home/" + USERNAME + "/.oh-my-zsh"])
-    check_call(["cp", "/home/" + USERNAME +
-                "/.oh-my-zsh/templates/zshrc.zsh-template",
-                "/home/" + USERNAME + "/.zshrc"])
+                home("/.oh-my-zsh")])
+    check_call(["cp", home("/.oh-my-zsh/templates/zshrc.zsh-template"),
+                home("/.zshrc")])
     check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
-                "/home/" + USERNAME + "/.zshrc"])
+                home("/.zshrc")])
     check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
-                "/home/" + USERNAME + "/.oh-my-zsh"])
+                home("/.oh-my-zsh")])
     check_call(["usermod", "--shell", "/usr/bin/zsh", USERNAME])
-    merge("/home/" + USERNAME + "/.zshrc", ZSH_CONFIG)
-    open("/home/" + USERNAME + "/.oh-my-zsh/.core4_installed", "w").write(
-        VERSION)
+    merge(home("/.zshrc"), ZSH_CONFIG)
+    open(home("/.oh-my-zsh/.core4_installed"), "w").write(VERSION)
 
+# ########################################################################### #
+# powerlevel9k
+# ########################################################################### #
+
+if not os.path.exists(home("/powerlevel9k/.core4_installed")):
+    title("powerlevel9k zsh extension")
+    if os.path.exists(home("/powerlevel9k")):
+        check_call(["rm", "-R", "-f", "-v", home("/powerlevel9k")])
+    check_call(["git", "clone", "https://github.com/bhilburn/powerlevel9k.git",
+                home("/powerlevel9k")])
+    check_call(["wget", "https://github.com/powerline/powerline/raw/develop"
+                        "/font/PowerlineSymbols.otf"])
+    check_call(["wget", "https://github.com/powerline/powerline/raw/develop"
+                        "/font/10-powerline-symbols.conf"])
+    if not os.path.exists(home("/.local/share/fonts/")):
+        os.makedirs(home("/.local/share/fonts/"))
+    check_call(["mv", "PowerlineSymbols.otf", home("/.local/share/fonts/")])
+    check_call(["fc-cache", home("/.local/share/fonts/")])
+    check_call(["mv", "10-powerline-symbols.conf",
+                home("/.config/fontconfig/conf.d/")])
 
 # ########################################################################### #
 # auto login
@@ -568,8 +605,7 @@ merge("/etc/gdm3/daemon.conf", GDM)
 os.chdir(CURDIR)
 call(["rm", "-R", "-f", WD])
 
-title("done.")
-print("")
+print("\ndone.\n")
 print("To finish the setup you need to reboot\n\n"
       ">>> PRESS RETURN TO CONINUE (press CTRL+C to stop)")
 input()
