@@ -532,7 +532,7 @@ os.system('su mra -c "/usr/bin/dconf load / < settings"')
 # zsh shell
 # ########################################################################### #
 
-if not os.path.exists("/home/" + USERNAME + "/.oh-my-zsh"):
+if not os.path.exists("/home/" + USERNAME + "/.oh-my-zsh/.core4_installed"):
     title("zsh shell")
     if os.path.exists("/home/" + USERNAME + "/.oh-my-zsh"):
         check_call(["rm", "-R", "-f", "-v",
@@ -552,7 +552,8 @@ if not os.path.exists("/home/" + USERNAME + "/.oh-my-zsh"):
                 "/home/" + USERNAME + "/.oh-my-zsh"])
     check_call(["su", USERNAME, "-c", "chsh -s /bin/zsh"])
     merge("/home/" + USERNAME + "/.zshrc", ZSH_CONFIG)
-
+    open("/home/" + USERNAME + "/.oh-my-zsh/.core4_installed", "w").write(
+        VERSION)
 
 # ########################################################################### #
 # auto login
