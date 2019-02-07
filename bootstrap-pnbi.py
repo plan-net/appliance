@@ -590,16 +590,9 @@ if not os.path.exists(home("/powerlevel9k/.core4_installed")):
                         "/font/10-powerline-symbols.conf"])
     if not os.path.exists(home("/.local/share/fonts/")):
         os.makedirs(home("/.local/share/fonts/"))
-    check_call(["mv", "PowerlineSymbols.otf", home("/.local/share/fonts/")])
-    check_call(["fc-cache", home("/.local/share/fonts/")])
-    if not os.path.exists(home("/.config/fontconfig/conf.d/")):
-        os.makedirs(home("/.config/fontconfig/conf.d/"))
-    check_call(["mv", "10-powerline-symbols.conf",
-                home("/.config/fontconfig/conf.d/")])
-    check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
-                home("/.local/share/fonts")])
-    check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
-                home("/.config/fontconfig/conf.d")])
+    check_call(["mv", "PowerlineSymbols.otf", "/usr/share/fonts/"])
+    check_call(["fc-cache", "-v", "-f", "/usr/share/fonts/"])
+    check_call(["mv", "10-powerline-symbols.conf", "/etc/fonts/conf.d/"])
     open(home("/powerlevel9k/.core4_installed"), "w").write(VERSION)
 
 # ########################################################################### #
