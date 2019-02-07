@@ -590,8 +590,8 @@ if not os.path.exists(home("/powerlevel9k/.core4_installed")):
         os.makedirs(home("/.local/share/fonts/"))
     check_call(["mv", "PowerlineSymbols.otf", home("/.local/share/fonts/")])
     check_call(["fc-cache", home("/.local/share/fonts/")])
-    if not os.path.exists(home("/.local/share/fonts/")):
-        os.makedirs(home("/.local/share/fonts/"))
+    if not os.path.exists(home("/.config/fontconfig/conf.d/")):
+        os.makedirs(home("/.config/fontconfig/conf.d/"))
     check_call(["mv", "10-powerline-symbols.conf",
                 home("/.config/fontconfig/conf.d/")])
 
