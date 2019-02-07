@@ -244,7 +244,17 @@ Host *
     AddKeysToAgent yes
     IdentityFile ~/.ssh/id_rsa
 """
+ZSH_CONFIG = """
+ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_C4() {
+    echo ""
+}
 
+POWERLEVEL9K_CUSTOM_C4="ZSH_C4"
+POWERLEVEL9K_CUSTOM_C4_FOREGROUND="yellow"
+POWERLEVEL9K_CUSTOM_C4_BACKGROUND="black"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs c4)
+"""
 
 def title(t):
     print("")
@@ -541,6 +551,8 @@ if not os.path.exists("/home/" + USERNAME + "/.oh-my-zsh"):
     check_call(["chown", "-R", "-v", USERNAME + ":" + USERNAME,
                 "/home/" + USERNAME + "/.oh-my-zsh"])
     check_call(["su", USERNAME, "-c", "chsh -s /bin/zsh"])
+    merge("/home/" + USERNAME + "/.zshrc", ZSH_CONFIG)
+
 
 # ########################################################################### #
 # auto login
