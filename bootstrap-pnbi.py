@@ -14,10 +14,10 @@ if len(sys.argv) > 1:
 else:
     USERNAME = os.getlogin()
 
-VERSION = "0.3"  # used for config version (future)
+VERSION = "0.4"  # used for config version (future)
 PACKAGES = "linux-headers-amd64 gcc make perl sudo tmux screen git curl " \
            "wget mc htop gimp runit runit-systemd zsh python3-venv " \
-           "libgconf-2-4 python3-dev build-essential"
+           "libgconf-2-4 python3-dev build-essential libappindicator3-1"
 ROBO3T = "robo3t-1.2.1-linux-x86_64-3e50a65"
 PYCHARM = "pycharm-community-2018.3.4"
 CONDA_PACKAGES = "pandas anaconda-navigator rstudio jupyterlab pymongo " \
@@ -610,10 +610,23 @@ if not check_version(home("/powerlevel9k")):
 # auto login
 # ########################################################################### #
 
+
 title("auto login")
 merge("/etc/gdm3/daemon.conf", GDM)
 
+# ########################################################################### #
+# google
+# ########################################################################### #
+
+if not os.path.exists("/usr/bin/google-chrome"):
+    title("google chrome")
+    check_call(["wget", "ttps://dl.google.com/linux/direct"
+                        "/google-chrome-stable_current_amd64.deb"])
+    check_call(["dpkg", "-i", "google-chrome-stable_current_amd64.deb"])
+
+# ########################################################################### #
 # finish
+# ########################################################################### #
 
 os.chdir(CURDIR)
 call(["rm", "-R", "-f", WD])
