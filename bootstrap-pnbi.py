@@ -5,9 +5,8 @@ import os
 import re
 import sys
 import tempfile
-from subprocess import call, check_call, Popen, PIPE
-
 import time
+from subprocess import call, check_call, Popen, PIPE
 
 CURDIR = os.path.abspath(os.curdir)
 if len(sys.argv) > 1:
@@ -15,7 +14,7 @@ if len(sys.argv) > 1:
 else:
     USERNAME = os.getlogin()
 
-VERSION = "0.2"  # used for config version (future)
+VERSION = "0.3"  # used for config version (future)
 PACKAGES = "linux-headers-amd64 gcc make perl sudo tmux screen git curl " \
            "wget mc htop gimp runit runit-systemd zsh python3-venv " \
            "libgconf-2-4 python3-dev build-essential"
@@ -286,6 +285,16 @@ def merge(filename, update):
         open(filename, "w").write(update)
 
 
+def check_version(pathname):
+    filename = os.path.join(pathname, ".core4_installed")
+    return os.path.exists(filename)
+
+
+def write_version(pathname):
+    filename = os.path.join(pathname, ".core4_installed")
+    open(filename, "w").write(VERSION)
+
+
 def home(path):
     if not path.startswith("/"):
         path = "/" + path
@@ -368,7 +377,7 @@ check_call(["apt-get", "install", "--yes"] + PACKAGES.split())
 # robo3t
 # ########################################################################### #
 
-if not os.path.exists("/opt/" + ROBO3T + "/.core4_installed"):
+if not check_version("/opt/" + ROBO3T):
     title("robo3t setup")
     if os.path.exists("/opt/" + ROBO3T):
         check_call(["rm", "-R", "-f", "-v", "/opt/" + ROBO3T])
@@ -382,7 +391,7 @@ if not os.path.exists("/opt/" + ROBO3T + "/.core4_installed"):
     if os.path.exists("/usr/local/bin/robo3t"):
         check_call(["rm", "/usr/local/bin/robo3t"])
     check_call(["ln", "-s", "/opt/robo3t/bin/robo3t", "/usr/local/bin/robo3t"])
-    open("/opt/" + ROBO3T + "/.core4_installed", "w").write(VERSION)
+    write_version("/opt/" + ROBO3T)
 
 # ########################################################################### #
 # postman
@@ -399,13 +408,13 @@ if not os.path.exists("/opt/Postman"):
         check_call(["rm", "/usr/local/bin/postman"])
     check_call(
         ["ln", "-s", "/opt/Postman/app/Postman", "/usr/local/bin/postman"])
-    open("/opt/Postman/.core4_installed", "w").write(VERSION)
+    write_version("/opt/Postman")
 
 # ########################################################################### #
 # Pycharm
 # ########################################################################### #
 
-if not os.path.exists("/opt/" + PYCHARM + "/.core4_installed"):
+if not check_version("/opt/" + PYCHARM):
     title("pycharm setup")
     if os.path.exists("/opt/" + PYCHARM):
         check_call(["rm", "-R", "-f", "-v", "/opt/" + PYCHARM])
@@ -420,7 +429,7 @@ if not os.path.exists("/opt/" + PYCHARM + "/.core4_installed"):
         check_call(["rm", "/usr/local/bin/pycharm"])
     check_call(["ln", "-s", "/opt/pycharm/bin/pycharm.sh",
                 "/usr/local/bin/pycharm"])
-    open("/opt/" + PYCHARM + "/.core4_installed", "w").write(VERSION)
+    write_version("/opt/" + PYCHARM)
 
 # ########################################################################### #
 # miniconda with plugins
@@ -431,7 +440,7 @@ if not os.path.exists("/opt/" + PYCHARM + "/.core4_installed"):
 # - rstudio
 # - jupyterlab and ipython notebooks
 
-if not os.path.exists("/opt/miniconda3/.core4_installed"):
+if not check_version("/opt/miniconda3"):
     title("miniconda setup")
     if os.path.exists("/opt/miniconda3"):
         check_call(["rm", "-R", "-f", "-v", "/opt/miniconda3"])
@@ -445,15 +454,17 @@ if not os.path.exists("/opt/miniconda3/.core4_installed"):
                env=env)
     check_call(["/opt/miniconda3/bin/conda", "install", "-q", "-y"] +
                CONDA_PACKAGES.split(), env=env)
-    open("/usr/local/bin/conda", "w").write(CONDA_COMMAND)
-    check_call(["chmod", "-v", "755", "/usr/local/bin/conda"])
-    open("/opt/miniconda3/.core4_installed", "w").write(VERSION)
+    write_version("/opt/miniconda3")
+
+title("miniconda setup")
+open("/usr/local/bin/conda", "w").write(CONDA_COMMAND.strip())
+check_call(["chmod", "-v", "755", "/usr/local/bin/conda"])
 
 # ########################################################################### #
 # MongoDB
 # ########################################################################### #
 
-if not os.path.exists("/srv/" + MONGODB + "/.core4_installed"):
+if not check_version("/srv/" + MONGODB):
     title("MongoDB setup")
     call(["sv", "down", "mongodb"])
     if os.path.exists("/srv/" + MONGODB):
@@ -499,7 +510,7 @@ if not os.path.exists("/srv/" + MONGODB + "/.core4_installed"):
     check_call(["ln", "-s", "/etc/sv/mongodb", "/etc/service/mongodb"])
     call(["sv", "up", "mongodb"])
     call(["sv", "status", "mongodb"])
-    open("/srv/" + MONGODB + "/.core4_installed", "w").write(VERSION)
+    write_version("/srv/" + MONGODB)
 
 # ########################################################################### #
 # /etc/hosts
@@ -553,7 +564,7 @@ merge(home("/.ssh/config"), SSH_CONFIG)
 # zsh shell
 # ########################################################################### #
 
-if not os.path.exists(home("/.oh-my-zsh/.core4_installed")):
+if not check_version(home("/.oh-my-zsh")):
     title("zsh shell")
     if os.path.exists(home("/.oh-my-zsh")):
         check_call(["rm", "-R", "-f", "-v", home("/.oh-my-zsh")])
@@ -570,13 +581,13 @@ if not os.path.exists(home("/.oh-my-zsh/.core4_installed")):
                 home("/.oh-my-zsh")])
     check_call(["usermod", "--shell", "/usr/bin/zsh", USERNAME])
     merge(home("/.zshrc"), ZSH_CONFIG)
-    open(home("/.oh-my-zsh/.core4_installed"), "w").write(VERSION)
+    write_version(home("/.oh-my-zsh"))
 
 # ########################################################################### #
 # powerlevel9k
 # ########################################################################### #
 
-if not os.path.exists(home("/powerlevel9k/.core4_installed")):
+if not check_version(home("/powerlevel9k")):
     title("powerlevel9k zsh extension")
     if os.path.exists(home("/powerlevel9k")):
         check_call(["rm", "-R", "-f", "-v", home("/powerlevel9k")])
@@ -593,7 +604,7 @@ if not os.path.exists(home("/powerlevel9k/.core4_installed")):
     check_call(["mv", "PowerlineSymbols.otf", "/usr/share/fonts/"])
     check_call(["fc-cache", "-v", "-f", "/usr/share/fonts/"])
     check_call(["mv", "10-powerline-symbols.conf", "/etc/fonts/conf.d/"])
-    open(home("/powerlevel9k/.core4_installed"), "w").write(VERSION)
+    write_version(home("/powerlevel9k"))
 
 # ########################################################################### #
 # auto login
