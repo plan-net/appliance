@@ -17,7 +17,8 @@ else:
 VERSION = "0.4"  # used for config version (future)
 PACKAGES = "linux-headers-amd64 gcc make perl sudo tmux screen git curl " \
            "wget mc htop gimp runit runit-systemd zsh python3-venv " \
-           "libgconf-2-4 python3-dev build-essential libappindicator3-1"
+           "libgconf-2-4 python3-dev build-essential libappindicator3-1 " \
+           "meld"
 ROBO3T = "robo3t-1.2.1-linux-x86_64-3e50a65"
 PYCHARM = "pycharm-community-2018.3.4"
 CONDA_PACKAGES = "pandas anaconda-navigator rstudio jupyterlab pymongo " \
