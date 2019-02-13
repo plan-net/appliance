@@ -621,7 +621,7 @@ merge("/etc/gdm3/daemon.conf", GDM)
 
 if not os.path.exists("/usr/bin/google-chrome"):
     title("google chrome")
-    check_call(["wget", "ttps://dl.google.com/linux/direct"
+    check_call(["wget", "https://dl.google.com/linux/direct"
                         "/google-chrome-stable_current_amd64.deb"])
     check_call(["dpkg", "-i", "google-chrome-stable_current_amd64.deb"])
 
