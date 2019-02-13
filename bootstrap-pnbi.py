@@ -555,9 +555,13 @@ for desk, body in DESKTOP.items():
 # gnome settings
 # ########################################################################### #
 
-title("gnome 3 settings")
-open("settings", "w").write(GNOME)
-os.system('su ' + USERNAME + ' -c "/usr/bin/dconf load / < settings"')
+
+if not check_version(home("/.gnome")):
+    title("gnome 3 settings")
+    open("settings", "w").write(GNOME)
+    os.system('su ' + USERNAME + ' -c "/usr/bin/dconf load / < settings"')
+    os.remove("settings")
+    write_version(home("/.gnome"))
 
 # ########################################################################### #
 # ssh config
