@@ -14,7 +14,7 @@ if len(sys.argv) > 1:
 else:
     USERNAME = os.getlogin()
 
-VERSION = "0.4"  # used for config version (future)
+VERSION = "0.5"  # used for config version (future)
 PACKAGES = "linux-headers-amd64 gcc make perl sudo tmux screen git curl " \
            "wget mc htop gimp runit runit-systemd zsh python3-venv " \
            "libgconf-2-4 python3-dev build-essential libappindicator3-1 " \
@@ -286,13 +286,13 @@ def merge(filename, update):
         open(filename, "w").write(update)
 
 
-def check_version(pathname):
-    filename = os.path.join(pathname, ".core4_installed")
+def check_version(pathname, marker=".core4_installed"):
+    filename = os.path.join(pathname, marker)
     return os.path.exists(filename)
 
 
-def write_version(pathname):
-    filename = os.path.join(pathname, ".core4_installed")
+def write_version(pathname, marker=".core4_installed"):
+    filename = os.path.join(pathname, marker)
     open(filename, "w").write(VERSION)
 
 
@@ -457,9 +457,14 @@ if not check_version("/opt/miniconda3"):
                CONDA_PACKAGES.split(), env=env)
     write_version("/opt/miniconda3")
 
-title("miniconda setup")
-open("/usr/local/bin/conda", "w").write(CONDA_COMMAND.strip())
-check_call(["chmod", "-v", "755", "/usr/local/bin/conda"])
+if not check_version("/opt/miniconda3", ".core4_upgrade_1"):
+
+    title("miniconda setup")
+    open("/usr/local/bin/conda", "w").write(CONDA_COMMAND.strip())
+    check_call(["chmod", "-v", "755", "/usr/local/bin/conda"])
+
+    check_call(["chown", "-R", "-v", USERNAME + ":root", "/opt/miniconda3"])
+    write_version("/opt/miniconda3", ".core4_upgrade_1")
 
 # ########################################################################### #
 # MongoDB
