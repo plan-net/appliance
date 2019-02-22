@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# https://raw.githubusercontent.com/m-rau/appliance/master/bootstrap-salt.sh
+# wget https://raw.githubusercontent.com/m-rau/appliance/master/bootstrap-salt.sh -O - | bash
 
 cd
 test -d .pnbi_salt || mkdir .pnbi_salt
