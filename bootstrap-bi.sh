@@ -9,10 +9,11 @@ if (( $EUID != 0 )); then
 fi
 
 if [ -n "$SUDO_USER" ]; then
-    USERHOME="/home/$SUDO_USER"
+    USER="$SUDO_USER"
 else
-    USERHOME="/home/$USERNAME"
+    USER="$USERNAME"
 fi
+USERHOME="/home/$USER"
 
 test -d "$USERHOME/.pnbi_salt" || mkdir "$USERHOME/.pnbi_salt"
 cd "$USERHOME/.pnbi_salt"
@@ -30,6 +31,7 @@ fi
 
 if [ ! -d appliance ]; then
     git clone https://github.com/m-rau/appliance.git
+    chown -R $USER:$USER appliance
 else
     cd appliance
     git pull
