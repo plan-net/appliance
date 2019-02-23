@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 # Check return value to see if there are incoming updates.
 if ! git diff --quiet remotes/origin/HEAD; then
  # pull or whatever you want to do
