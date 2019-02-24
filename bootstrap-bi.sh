@@ -5,7 +5,6 @@
 
 if (( $EUID != 0 )); then
     echo "restarting as root..."
-    echo "$ cd $PWD; /bin/bash $0"
     su -c "cd $PWD; /bin/bash $0"
     exit
 fi
@@ -16,9 +15,6 @@ else
     USER="$USERNAME"
 fi
 USERHOME="/home/$USER"
-
-echo "starting in $USERHOME for $USER"
-exit
 
 test -d "$USERHOME/.pnbi_salt" || mkdir "$USERHOME/.pnbi_salt"
 cd "$USERHOME/.pnbi_salt"
