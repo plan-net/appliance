@@ -38,4 +38,5 @@ else
     cd ..
 fi
 
-salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l debug --local state.apply setup | tee $USERHOME/salt_call.log
+salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l debug --local state.apply setup > $USERHOME/salt_call.log
+chown $USER:root $USERHOME/salt_call.log
