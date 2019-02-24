@@ -2,12 +2,25 @@
 
 from subprocess import check_output, check_call, STDOUT
 from os.path import expanduser, abspath, join, exists
-from os import chdir, system, unlink
+from os import chdir, system, unlink, makedirs
 import sys
 
 home = abspath(expanduser("~"))
-worktree = join(home, ".pnbi_salt/appliance")
+pnbi = join(home, ".pnbi_salt")
+worktree = join(pnbi, "appliance")
+
+if not exists(pnbi):
+    makedirs(pnbi)
+if not exists(worktree):
+    check_call(["/usr/bin/git", "clone",
+                "https://github.com/m-rau/appliance.git"])
+if not exists("/usr/bin/salt-minion"):
+    check_call(["/usr/bin/wget", "https://bootstrap.saltstack.com",
+                "-O", "bootstrap-salt.sh"])
+    check_call(["/usr/bin/sudo", "/bin/sh", "bootstrap-salt.sh", "-X",
+                "stable"])
 chdir(worktree)
+
 out = check_output([
     "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
 if out != "" or exists(".upgrade"):
@@ -39,3 +52,5 @@ if exists(".upgrade"):
         worktree=worktree, home=home)
     system(cmd)
     unlink(".upgrade")
+
+# todo: fix $ systemctrl status console-setup.service

@@ -1,5 +1,16 @@
 #!/bin/bash
 
+echo "
+██████╗ ███╗   ██╗     ██████╗ ██╗    ██╗   ██╗██████╗
+██╔══██╗████╗  ██║     ██╔══██╗██║    ██║   ██║██╔══██╗
+██████╔╝██╔██╗ ██║     ██████╔╝██║    ██║   ██║██████╔╝
+██╔═══╝ ██║╚██╗██║     ██╔══██╗██║    ╚██╗ ██╔╝██╔══██╗
+██║     ██║ ╚████║ ██╗ ██████╔╝██║     ╚████╔╝ ██████╔╝
+╚═╝     ╚═╝  ╚═══╝ ╚═╝ ╚═════╝ ╚═╝      ╚═══╝  ╚═════╝
+VERSION 1.0
+
+"
+
 # wget https://raw.githubusercontent.com/m-rau/appliance/master/bootstrap-bi.sh
 # bash bootstrap-bi.sh
 
@@ -39,7 +50,7 @@ else
     cd ..
 fi
 
-salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l info --local state.apply setup 2>&1 | tee $USERHOME/salt_call.log
+salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l info --local --state-output=changes state.apply setup 2>&1 | tee $USERHOME/salt_call.log
 chmod 755 $USERHOME/salt_call.log
 
 echo

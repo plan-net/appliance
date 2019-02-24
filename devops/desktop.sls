@@ -33,3 +33,28 @@ wallpaper:
         /usr/bin/dconf write "/org/gnome/desktop/screensaver/picture-uri" "'file:///opt/Linux-Wallpaper-24.png'"
         /usr/bin/dconf write "/org/gnome/desktop/background/picture-uri" "'file:///opt/Linux-Wallpaper-24.png'"
     - runas: {{ username }}
+
+/opt/system:
+  file.absent
+
+/home/{{ username }}/.oh-my-zsh/.core4_installed:
+  file.absent
+
+/home/{{ username }}/.gnome/.core4_installed:
+  file.absent
+
+/home/{{ username }}/powerlevel9k/.core4_installed:
+  file.absent
+
+/srv/mongodb-linux-x86_64-debian92-4.0.5/.core4_installed:
+  file.absent
+
+/opt/Postman/.core4_installed:
+  file.absent
+
+/opt/pycharm-community-2018.3.4/.core4_installed:
+  file.absent
+
+/opt/robo3t-1.2.1-linux-x86_64-3e50a65/.core4_installed:
+  file.absent
+

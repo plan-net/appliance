@@ -15,6 +15,17 @@ change_zsh:
         touch /home/{{ username }}/.oh-my-zsh/.default
     - creates: /home/{{ username }}/.oh-my-zsh/.default
 
+cleanup_zshrc:
+  file.replace:
+    - name: /home/{{ username }}/.zshrc
+    - pattern: |
+        \# START\: CORE4.+?END\: CORE4\-BOOTSTRAP[\s\d\.]+
+    - flags:
+      - MULTILINE
+      - DOTALL
+    - repl: ""
+
+
 /home/{{ username }}/.zshrc:
   file.append:
     - text: |

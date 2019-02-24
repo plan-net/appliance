@@ -1,3 +1,13 @@
+cleanup_hosts:
+  file.replace:
+    - name: /etc/hosts
+    - pattern: |
+        \# START\: CORE4.+?END\: CORE4.+?\n
+    - flags:
+      - MULTILINE
+      - DOTALL
+    - repl: ""
+
 /etc/hosts:
   file.append:
     - text: |
