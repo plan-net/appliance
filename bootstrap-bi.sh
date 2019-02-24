@@ -46,3 +46,5 @@ echo "system requires reboot"
 echo "hit return to continue"
 echo
 read answer
+
+reboot
