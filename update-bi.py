@@ -11,20 +11,28 @@ import sys
 home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
 worktree = join(pnbi, "appliance")
+UPDATE_FILE = join(pnbi, ".upgrade")
+
+def do_update():
+    open(UPDATE_FILE, "w").write("")
+
 
 if not exists(pnbi):
     makedirs(pnbi)
+    do_update()
 chdir(pnbi)
 if not exists(worktree):
     check_call(["/usr/bin/git", "clone",
                 "https://github.com/m-rau/appliance.git"])
+    do_update()
 if not exists("/usr/bin/salt-minion"):
     check_call(["/usr/bin/wget", "https://bootstrap.saltstack.com",
                 "-O", "bootstrap-salt.sh"])
     check_call(["/usr/bin/sudo", "/bin/sh", "bootstrap-salt.sh", "-X",
                 "stable"])
-chdir(worktree)
+    do_update()
 
+chdir(worktree)
 out = check_output([
     "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
 if out != "" or exists(".upgrade"):
@@ -42,12 +50,12 @@ if out != "" or exists(".upgrade"):
         print("do you want to upgrade now [y/n]: ", end="")
         inp = input().lower().strip()
         if inp == "y":
-            open(".upgrade", "w").write("")
+            do_update()
             break
         elif inp == "n":
             sys.exit(1)
 
-if exists(".upgrade"):
+if exists(UPDATE_FILE):
     print("run upgrade")
     check_call(["git", "pull"])
     cmd = "sudo salt-call --file-root {worktree}/devops -l debug --local " \
@@ -55,6 +63,6 @@ if exists(".upgrade"):
           "chmod 755 {home}/salt_call.log".format(
         worktree=worktree, home=home)
     system(cmd)
-    unlink(".upgrade")
+    unlink(UPDATE_FILE)
 
 # todo: fix $ systemctrl status console-setup.service
