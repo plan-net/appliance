@@ -11,6 +11,7 @@ chdir(worktree)
 out = check_output([
     "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
 if out != "" or exists(".upgrade"):
+    print()
     print("==============================")
     print("Plan.Net Business Intelligence")
     print("==============================")
@@ -21,7 +22,7 @@ if out != "" or exists(".upgrade"):
     print("         important security patches as well as productivity tools.")
     print()
     while True:
-        print("   do you want to upgrade now [y/n]: ", end="")
+        print("do you want to upgrade now [y/n]: ", end="")
         inp = input().lower().strip()
         if inp == "y":
             open(".upgrade", "w").write("")
