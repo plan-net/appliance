@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # wget https://raw.githubusercontent.com/m-rau/appliance/master/update-bi.py
-# python update-bi.py
+# python3 update-bi.py
 
 from subprocess import check_output, check_call, STDOUT
 from os.path import expanduser, abspath, join, exists
