@@ -90,11 +90,6 @@ MONGODB_RUN = """
 
 exec chpst -umongo /srv/mongodb/bin/mongod --config /srv/mongodb/local.conf --auth --keyFile /srv/mongodb/keyfile
 """
-MONGODB_REPLICA = """
-replication:
-   oplogSizeMB: 1000
-   replSetName: rs0
-"""
 HOSTS = """
 10.249.1.70     pnbi_mongodb1 mongodb1
 10.249.1.71     pnbi_mongodb2 mongodb2
@@ -522,19 +517,6 @@ if not check_version("/srv/" + MONGODB):
     call(["sv", "up", "mongodb"])
     call(["sv", "status", "mongodb"])
     write_version("/srv/" + MONGODB)
-
-if not check_version("/srv/mongodb/data"):
-    title("MongoDB replica setup")
-    open("/srv/mongodb/local.conf", "a").write(MONGODB_REPLICA)
-    call(["sv", "down", "restart"])
-    proc = Popen(
-        ["/srv/mongodb/bin/mongo", "--host", "127.0.0.1", "--port",
-         "27017", "--username", "core", "--password", "654321",
-         "--authenticationDatabase", "admin"], stdin=PIPE)
-    proc.stdin.write("rs.initiate()")
-    proc.wait()
-    write_version("/srv/mongodb/data")
-
 
 # ########################################################################### #
 # /etc/hosts
