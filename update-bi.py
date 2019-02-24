@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+# wget https://raw.githubusercontent.com/m-rau/appliance/master/update-bi.py
+# python update-bi.py
+
 from subprocess import check_output, check_call, STDOUT
 from os.path import expanduser, abspath, join, exists
 from os import chdir, system, unlink, makedirs
@@ -11,6 +14,7 @@ worktree = join(pnbi, "appliance")
 
 if not exists(pnbi):
     makedirs(pnbi)
+chdir(pnbi)
 if not exists(worktree):
     check_call(["/usr/bin/git", "clone",
                 "https://github.com/m-rau/appliance.git"])
