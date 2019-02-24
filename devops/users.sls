@@ -3,6 +3,7 @@
 user:
   user.present:
     - name: {{ username }}
-    - groups:
+    - remove_groups: false
+    - optional_groups:
       - vboxsf
       - sudo

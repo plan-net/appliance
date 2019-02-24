@@ -1,6 +1,6 @@
 postman_archive:
   archive:
-    - if_missing: /opt/postman
+    - if_missing: /opt/Postman
     - extracted
     - name: /opt/
     - source: https://dl.pstmn.io/download/latest/linux64
