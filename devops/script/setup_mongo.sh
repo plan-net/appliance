@@ -44,7 +44,7 @@ until echo "rs.status()" | /srv/mongodb/bin/mongo --host 127.0.0.1 --port 27017 
       sleep 1
     done
 
-sleep 5
+sleep 10
 
 cat > protect.js <<- .
 use admin
