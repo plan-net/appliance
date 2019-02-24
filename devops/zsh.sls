@@ -29,4 +29,6 @@ change_zsh:
         POWERLEVEL9K_CUSTOM_C4_FOREGROUND="yellow"
         POWERLEVEL9K_CUSTOM_C4_BACKGROUND="black"
         POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs custom_c4)
+
+        ~/.pnbi_salt/appliance/bi-update.py
         # end of devops .zshrc
