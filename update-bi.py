@@ -22,34 +22,37 @@ if not exists(pnbi):
     chdir(pnbi)
     check_call(["/usr/bin/git", "clone",
                 "https://github.com/m-rau/appliance.git"])
+    do_update()
+if not exists("/usr/bin/salt-call"):
+    chdir(pnbi)
     check_call(["/usr/bin/wget", "https://bootstrap.saltstack.com",
                 "-O", "bootstrap-salt.sh"])
     check_call(["/usr/bin/sudo", "/bin/sh", "bootstrap-salt.sh", "-X",
                 "stable"])
     do_update()
-else:
-    chdir(worktree)
-    out = check_output([
-        "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
-    if out != "" or exists(".upgrade"):
-        print()
-        print("==============================")
-        print("Plan.Net Business Intelligence")
-        print("==============================")
-        print("=> your devops station requires upgrades !\n")
-        print()
-        print("NOTE: as a core operator it is your responsibility to upgrade")
-        print("      your workstation regularly and in time. Upgrades include")
-        print("      important security patches as well as productivity tools.")
-        print()
-        while True:
-            print("do you want to upgrade now [y/n]: ", end="")
-            inp = input().lower().strip()
-            if inp == "y":
-                do_update()
-                break
-            elif inp == "n":
-                sys.exit(1)
+
+chdir(worktree)
+out = check_output([
+    "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
+if out != "" or exists(".upgrade"):
+    print()
+    print("==============================")
+    print("Plan.Net Business Intelligence")
+    print("==============================")
+    print("=> your devops station requires upgrades !\n")
+    print()
+    print("NOTE: as a core operator it is your responsibility to upgrade")
+    print("      your workstation regularly and in time. Upgrades include")
+    print("      important security patches as well as productivity tools.")
+    print()
+    while True:
+        print("do you want to upgrade now [y/n]: ", end="")
+        inp = input().lower().strip()
+        if inp == "y":
+            do_update()
+            break
+        elif inp == "n":
+            sys.exit(1)
 
 if exists(UPDATE_FILE):
     chdir(worktree)
