@@ -61,5 +61,3 @@ if exists(UPDATE_FILE):
         worktree=worktree, home=home)
     system(cmd)
     unlink(UPDATE_FILE)
-
-# todo: fix $ systemctrl status console-setup.service

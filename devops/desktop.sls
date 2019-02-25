@@ -58,3 +58,9 @@ wallpaper:
 /opt/robo3t-1.2.1-linux-x86_64-3e50a65/.core4_installed:
   file.absent
 
+systemctrl_console:
+  cmd.run:
+    - name: |
+        sudo systemctl restart console-setup.service
+        touch /home/{{ username }}/.pnbi_salt/.systemctrl_console
+    - creates: /home/{{ username }}/.pnbi_salt/.systemctrl_console
