@@ -52,6 +52,7 @@ else:
                 sys.exit(1)
 
 if exists(UPDATE_FILE):
+    chdir(worktree)
     print("run upgrade")
     check_call(["git", "pull"])
     cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
