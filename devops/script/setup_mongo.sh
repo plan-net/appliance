@@ -11,6 +11,10 @@ function kill_mongo {
     while ps -C mongod > /dev/null; do killall /srv/mongodb/bin/mongod; done
 }
 
+if [ -d /etc/sv/mongodb ]; then
+    sv down mongodb
+fi
+
 echo "kill existing mongodb service (step 1)"
 kill_mongo
 
