@@ -21,9 +21,11 @@ system_prerequisites:
       - python3-venv
       - libgconf-2-4
       - python3-dev
+      - python-dev
       - build-essential
       - libappindicator3-1
       - meld
+      - python-tk
 
 chrome:
   cmd.run:

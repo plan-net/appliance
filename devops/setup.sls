@@ -12,3 +12,5 @@ include:
   - .ssh
   - .powerlevel9k
   - .zsh
+  - .core4
+  - .core3

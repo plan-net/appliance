@@ -39,6 +39,7 @@ if out != "" or exists(".upgrade"):
     print("==============================")
     print("Plan.Net Business Intelligence")
     print("==============================")
+    print()
     print("=> your devops station requires upgrades !\n")
     print()
     print("NOTE: as a core operator it is your responsibility to upgrade")
