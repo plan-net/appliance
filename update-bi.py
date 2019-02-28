@@ -60,9 +60,11 @@ if exists(UPDATE_FILE):
     chdir(worktree)
     print("run upgrade")
     check_call(["git", "pull"])
+    cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
+    system(cmd)
     cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
           "--state-output=changes state.apply setup 2>&1 " \
-          "| tee {home}/salt_call.log; chmod 755 {home}/salt_call.log".format(
+          "| tee {home}/salt_call.log; chmod 777 {home}/salt_call.log".format(
         worktree=worktree, home=home)
     system(cmd)
     if exists(UPDATE_FILE):

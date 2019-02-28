@@ -52,7 +52,8 @@ else
 fi
 
 salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l info --local --state-output=changes state.apply setup 2>&1 | tee $USERHOME/salt_call.log
-chmod 755 $USERHOME/salt_call.log
+chown $USER:$USER $USERHOME/salt_call.log
+chmod 777 $USERHOME/salt_call.log
 
 echo
 echo "system requires reboot"
