@@ -40,6 +40,9 @@ wallpaper:
 /home/{{ username }}/.oh-my-zsh/.core4_installed:
   file.absent
 
+/home/{{ username }}/bootstrap-pnbi.sh:
+  file.absent
+
 /home/{{ username }}/.gnome/.core4_installed:
   file.absent
 
