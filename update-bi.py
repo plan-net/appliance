@@ -65,3 +65,5 @@ if exists(UPDATE_FILE):
         unlink(UPDATE_FILE)
     print()
     print(open(join(worktree, "motd.txt"), "r").read())
+
+
