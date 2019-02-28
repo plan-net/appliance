@@ -70,7 +70,7 @@ if exists(UPDATE_FILE):
             out = True
         if out:
             print(line)
-            if line.lower.startswith("failed"):
+            if line.lower().startswith("failed"):
                 if int(line.split()[1]) > 0:
                     error = True
     if error:
