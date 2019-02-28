@@ -4,7 +4,7 @@ postman_archive:
     - extracted
     - name: /opt/
     - source: https://dl.pstmn.io/download/latest/linux64
-    - source_hash: md5=125c25bcb1bb3a45c19e3513d6190946
+    - skip_verify: True
     - archive_format: tar
     - tar_options: z
     - keep: true
