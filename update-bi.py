@@ -69,14 +69,13 @@ if exists(UPDATE_FILE):
         if line.lower().startswith("summary for local"):
             out = True
         if out:
-            print(line)
             if line.lower().startswith("failed"):
                 if int(line.split()[1]) > 0:
                     error = True
+    print()
+    print(open(join(worktree, "motd.txt"), "r").read())
     if error:
         print()
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
         print("!!! PLEASE CONTACT bi-ops@plan-net.com")
         print()
-    print()
-    print(open(join(worktree, "motd.txt"), "r").read())
