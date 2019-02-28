@@ -2,7 +2,7 @@
 
 from subprocess import check_output, check_call, STDOUT
 from os.path import expanduser, abspath, join, exists
-from os import chdir, system, unlink, makedirs, WEXITSTATUS
+from os import chdir, system, unlink, makedirs
 import sys
 
 home = abspath(expanduser("~"))
@@ -52,7 +52,7 @@ if out != "" or exists(".upgrade"):
         elif inp == "n":
             sys.exit(1)
 
-if True or exists(UPDATE_FILE):
+if exists(UPDATE_FILE):
     chdir(worktree)
     print("run upgrade")
     check_call(["git", "pull"])
@@ -60,12 +60,23 @@ if True or exists(UPDATE_FILE):
           "--state-output=changes state.apply setup 2>&1 " \
           "| tee {home}/salt_call.log; chmod 755 {home}/salt_call.log".format(
         worktree=worktree, home=home)
-    if WEXITSTATUS(system(cmd)) != 0:
+    system(cmd)
+    if exists(UPDATE_FILE):
+        unlink(UPDATE_FILE)
+    out = False
+    error = False
+    for line in open(join(home, "salt_call.log"), "r"):
+        if line.lower().startswith("summary for local"):
+            out = True
+        if out:
+            print(line)
+            if line.lower().startswith("failed"):
+                if int(line.split()[1]) > 0:
+                    error = True
+    if error:
         print()
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
         print("!!! PLEASE CONTACT bi-ops@plan-net.com")
         print()
     print()
     print(open(join(worktree, "motd.txt"), "r").read())
-    if exists(UPDATE_FILE):
-        unlink(UPDATE_FILE)
