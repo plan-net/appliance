@@ -15,7 +15,7 @@ pycharm_archive:
 
 /opt/pycharm:
   file.symlink:
-    - target: /opt/{{ version }}/
+    - target: /opt/{{ version }}/xxx
 
 /usr/local/bin/pycharm:
   file.symlink:
