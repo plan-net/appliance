@@ -64,4 +64,4 @@ if True or exists(UPDATE_FILE):
     if exists(UPDATE_FILE):
         unlink(UPDATE_FILE)
     print()
-    print(open(join(pnbi, "motd.txt"), "r").read())
+    print(open(join(worktree, "motd.txt"), "r").read())
