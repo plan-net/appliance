@@ -8,6 +8,10 @@ import tempfile
 import time
 from subprocess import call, check_call, Popen, PIPE
 
+print("The bootstrap procedure with this file is outdated.\n"
+      "Use `bash ./bootstrap-bi.sh` instead")
+sys.exit(1)
+
 CURDIR = os.path.abspath(os.curdir)
 if len(sys.argv) > 1:
     USERNAME = sys.argv[1]
