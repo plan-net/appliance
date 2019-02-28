@@ -2,7 +2,7 @@
 
 /home/{{ username }}/.core4:
   file.directory:
-    - user: michael
+    - user: michaelx
     - group: {{ username }}
     - mode: 700
     - makedirs: True
