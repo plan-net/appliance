@@ -7,3 +7,4 @@ user:
     - optional_groups:
       - vboxsf
       - sudo
+      - bla bla
