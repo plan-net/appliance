@@ -52,7 +52,7 @@ if out != "" or exists(".upgrade"):
         elif inp == "n":
             sys.exit(1)
 
-if True or exists(UPDATE_FILE):
+if exists(UPDATE_FILE):
     chdir(worktree)
     print("run upgrade")
     check_call(["git", "pull"])
