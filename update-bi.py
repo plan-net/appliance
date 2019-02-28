@@ -63,7 +63,20 @@ if exists(UPDATE_FILE):
     system(cmd)
     if exists(UPDATE_FILE):
         unlink(UPDATE_FILE)
+    out = False
+    error = False
+    for line in open(join(home, "salt_call.log"), "r"):
+        if line.lower().startswith("summary for local"):
+            out = True
+        if out:
+            print(line)
+            if line.lower.startswith("failed"):
+                if int(line.split()[1]) > 0:
+                    error = True
+    if error:
+        print()
+        print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
+        print("!!! PLEASE CONTACT bi-ops@plan-net.com")
+        print()
     print()
     print(open(join(worktree, "motd.txt"), "r").read())
-
-
