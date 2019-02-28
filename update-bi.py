@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 
-# wget https://raw.githubusercontent.com/m-rau/appliance/master/update-bi.py
-# python3 update-bi.py
-
 from subprocess import check_output, check_call, STDOUT
 from os.path import expanduser, abspath, join, exists
 from os import chdir, system, unlink, makedirs
@@ -55,7 +52,7 @@ if out != "" or exists(".upgrade"):
         elif inp == "n":
             sys.exit(1)
 
-if exists(UPDATE_FILE):
+if True or exists(UPDATE_FILE):
     chdir(worktree)
     print("run upgrade")
     check_call(["git", "pull"])
@@ -64,4 +61,7 @@ if exists(UPDATE_FILE):
           "| tee {home}/salt_call.log; chmod 755 {home}/salt_call.log".format(
         worktree=worktree, home=home)
     system(cmd)
-    unlink(UPDATE_FILE)
+    if exists(UPDATE_FILE):
+        unlink(UPDATE_FILE)
+    print()
+    print(open(join(pnbi, "motd.txt"), "r").read())

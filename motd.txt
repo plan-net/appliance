@@ -1,0 +1,10 @@
+==============================
+Plan.Net Business Intelligence
+VirtualBox Appliance
+====================
+
+what's new ...
+
+    * automatic updates of the appliance
+    * Chrome
+    * appliance prepared for core3
