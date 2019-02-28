@@ -28,6 +28,7 @@ fi
 USERHOME="/home/$USER"
 
 test -d "$USERHOME/.pnbi_salt" || mkdir "$USERHOME/.pnbi_salt"
+chown $USER:$USER "$USERHOME/.pnbi_salt"
 cd "$USERHOME/.pnbi_salt"
 
 if ! [ -x "$(command -v salt-minion)" ]; then
