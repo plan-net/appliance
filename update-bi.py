@@ -29,8 +29,12 @@ if not exists("/usr/bin/salt-call"):
     do_update()
 
 chdir(worktree)
-out = check_output([
-    "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
+try:
+    out = check_output([
+        "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
+except:
+    print("no connection...\n... cannot check for upgrades!\nskip")
+    sys.exit()
 if out != "" or exists(".upgrade"):
     print()
     print("==============================")
