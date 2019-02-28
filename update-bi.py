@@ -64,8 +64,9 @@ if exists(UPDATE_FILE):
     system(cmd)
     cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
           "--state-output=changes state.apply setup 2>&1 " \
-          "| tee {home}/salt_call.log; chmod 777 {home}/salt_call.log".format(
-        worktree=worktree, home=home)
+          "| tee {home}/salt_call.log".format(worktree=worktree, home=home)
+    system(cmd)
+    cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
     if exists(UPDATE_FILE):
         unlink(UPDATE_FILE)
@@ -85,3 +86,5 @@ if exists(UPDATE_FILE):
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
         print("!!! PLEASE CONTACT bi-ops@plan-net.com")
         print()
+
+
