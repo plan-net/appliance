@@ -10,7 +10,7 @@ cleanup_hosts:
 
 /etc/hosts:
   file.append:
-    - content: |
+    - text: |
         # begin of devops hosts
         10.249.1.70     pnbi_mongodb1 mongodb1
         10.249.1.71     pnbi_mongodb2 mongodb2
