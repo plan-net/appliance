@@ -8,10 +8,23 @@ cleanup_hosts:
       - DOTALL
     - repl: ""
 
+cleanup_hosts_2:
+  file.replace:
+    - name: /etc/hosts
+    - pattern: |
+        \# begin of devops hosts.+?end of devops hosts.*\n?
+    - flags:
+      - MULTILINE
+      - DOTALL
+    - repl: ""
+
 /etc/hosts:
-  file.append:
-    - text: |
-        # begin of devops hosts
+  file.blockreplace:
+    - name: /etc/hosts
+    - marker_start: "# DO NOT EDIT - begin of devops"
+    - marker_end: "# DO NOT EDIT - end of devops"
+    - append_if_not_found: True
+    - content: |
         10.249.1.70     pnbi_mongodb1 mongodb1
         10.249.1.71     pnbi_mongodb2 mongodb2
 
@@ -38,4 +51,4 @@ cleanup_hosts:
         10.249.1.152    pnbi_staging_worker1 staging_worker1
         10.249.1.153    pnbi_staging_app staging_app
         10.249.1.154    pnbi_staging_proxyExt staging_proxyExt staging.bi.plan-net.com
-        # end of devops hosts
+    - show_changes: True
