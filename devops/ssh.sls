@@ -3,11 +3,15 @@
 /home/{{ username }}/.ssh/config:
   file.prepend:
     - makedirs: true
+    - user: {{ username }}
+    - group: {{ username }}
     - text: |
         # begin of devops .ssh/config
         Host *
             AddKeysToAgent yes
             IdentityFile ~/.ssh/id_rsa
+        Host brandinvestor-*
+            ProxyCommand ssh -W %h:%p brandinvestor.bi.plan-net.com
         # end of devops .ssh/config
 
 cleanup_ssh_config:

@@ -5,7 +5,6 @@ VirtualBox Appliance
 
 what's new ...
 
-    * automatic updates of the appliance
-    * Chrome
-    * MongoDB replica set
-    * appliance prepared for core3
+    * fix file ownerships
+    * add login proxy for brandinvestor in AWS
+
