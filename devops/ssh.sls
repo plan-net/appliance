@@ -1,5 +1,11 @@
 {% set username = salt['environ.get']('SUDO_USER') or salt['environ.get']('USERNAME') %}
 
+create_ssh_config:
+  file.managed:
+    - name: /home/{{ username }}/.ssh/config
+    - contents: |
+        # default empty devops file
+
 cleanup_ssh_config:
   file.replace:
     - name: /home/{{ username }}/.ssh/config
