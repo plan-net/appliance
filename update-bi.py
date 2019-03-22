@@ -2,13 +2,15 @@
 
 from subprocess import check_output, check_call, STDOUT
 from os.path import expanduser, abspath, join, exists
-from os import chdir, system, unlink, makedirs
+from os import chdir, system, unlink, makedirs, getlogin
 import sys
 
 home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
 worktree = join(pnbi, "appliance")
 UPDATE_FILE = join(pnbi, ".upgrade")
+username = getlogin()
+
 
 def do_update():
     open(UPDATE_FILE, "w").write("")
@@ -59,6 +61,9 @@ if out != "" or exists(".upgrade"):
 if exists(UPDATE_FILE):
     chdir(worktree)
     print("run upgrade")
+    cmd = "sudo chown -R {username}:{username} {pnbi}".format(
+        username=username, pnbi=pnbi)
+    system(cmd)
     check_call(["git", "pull"])
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
