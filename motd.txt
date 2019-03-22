@@ -5,6 +5,12 @@ VirtualBox Appliance
 
 what's new ...
 
+    2019 March 22 6:33pm
+
+    * add login proxy for core4 in AWS (preproduction test)
+
+    2019 March 16t 12:19am
+
     * fix file ownerships
     * add login proxy for brandinvestor in AWS
 
