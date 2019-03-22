@@ -51,4 +51,7 @@ cleanup_hosts_2:
         10.249.1.152    pnbi_staging_worker1 staging_worker1
         10.249.1.153    pnbi_staging_app staging_app
         10.249.1.154    pnbi_staging_proxyExt staging_proxyExt staging.bi.plan-net.com
+
+        35.158.149.95   core4_proxy
+
     - show_changes: True
