@@ -61,9 +61,6 @@ if out != "" or exists(".upgrade"):
 if exists(UPDATE_FILE):
     chdir(worktree)
     print("run upgrade")
-    cmd = "sudo chown -R {username}:{username} {pnbi}".format(
-        username=username, pnbi=pnbi)
-    system(cmd)
     check_call(["git", "pull"])
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
