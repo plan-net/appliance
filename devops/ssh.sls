@@ -39,6 +39,9 @@ cleanup_ssh_config_2:
         Host brandinvestor-*
             ProxyCommand ssh -W %h:%p brandinvestor.bi.plan-net.com
 
+        Host bi-worker*
+            ProxyCommand ssh -W %h:%p brandinvestor.bi.plan-net.com
+
         Host *.aws
             ProxyCommand ssh -W %h:%p 35.158.149.95
     - show_changes: True
