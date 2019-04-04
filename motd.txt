@@ -5,12 +5,18 @@ VirtualBox Appliance
 
 what's new ...
 
+    2019 March 16 12:19am
+
+    * fix file ownerships
+    * add login proxy for brandinvestor in AWS
+
     2019 March 22 6:33pm
 
     * add login proxy for core4 in AWS (preproduction test)
 
-    2019 March 16t 12:19am
+    2019 April 4 10:21pm
 
-    * fix file ownerships
-    * add login proxy for brandinvestor in AWS
+    * add brandinvestor bi-worker* to ssh connection settings
+
+
 
