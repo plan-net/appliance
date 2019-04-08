@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wget https://raw.githubusercontent.com/m-rau/appliance/master/bootstrap-bi.sh
+# wget https://raw.githubusercontent.com/plan-net/appliance/master/bootstrap-bi.sh
 # bash bootstrap-bi.sh
 
 if (( $EUID != 0 )); then
@@ -43,7 +43,7 @@ if ! [ -x "$(command -v git)" ]; then
 fi
 
 if [ ! -d appliance ]; then
-    git clone https://github.com/m-rau/appliance.git
+    git clone https://github.com/plan-net/appliance.git
     chown -R $USER:$USER appliance
 else
     cd appliance

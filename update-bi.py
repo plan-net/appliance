@@ -20,7 +20,7 @@ if not exists(pnbi):
     makedirs(pnbi)
     chdir(pnbi)
     check_call(["/usr/bin/git", "clone",
-                "https://github.com/m-rau/appliance.git"])
+                "https://github.com/plan-net/appliance.git"])
     do_update()
 if not exists("/usr/bin/salt-call"):
     chdir(pnbi)

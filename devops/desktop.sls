@@ -67,3 +67,11 @@ systemctrl_console:
         sudo systemctl restart console-setup.service
         touch /home/{{ username }}/.pnbi_salt/.systemctrl_console
     - creates: /home/{{ username }}/.pnbi_salt/.systemctrl_console
+
+plan_net_git:
+  cmd.run:
+    - name: |
+        cd /home/{{ username }}/.pnbi_salt/appliance
+        git remote set-url origin https://github.com/plan-net/appliance.git
+        touch /home/{{ username }}/.pnbi_salt/.plan_net_git
+    - creates: /home/{{ username }}/.pnbi_salt/.plan_net_git
