@@ -97,7 +97,7 @@ mongodb_runit:
         #!/bin/sh
 
         ls -tp /srv/mongodb/log/mongodb.log.* | grep -v '/$' | tail -n +3 | tr '\n' '\0' | xargs -0 -I {} echo {}
-        /usr/bin/chpst -u mongo /srv/mongodb/bin/mongod --auth -f /srv/mongodb/local.conf
+        exec /usr/bin/chpst -u mongo /srv/mongodb/bin/mongod --auth -f /srv/mongodb/local.conf
 
 mongodb_service_link:
   file.symlink:
