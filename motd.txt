@@ -5,6 +5,10 @@ VirtualBox Appliance
 
 what's new ...
 
+    2019 May 18 10:45pm
+
+    * fix mongodb up/down
+
     2019 March 22 6:33pm
 
     * add login proxy for core4 in AWS (preproduction test)
