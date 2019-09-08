@@ -1,19 +1,26 @@
 {% set username = salt['environ.get']('SUDO_USER') or salt['environ.get']('USERNAME') %}
 
+conda_opt_uninstall:
+  cmd.run:
+    - name: |
+        rm -Rf /opt/miniconda*
+
+
 conda_install:
   cmd.run:
     - name: |
-        test -d /opt/miniconda3 && rm -Rf /opt/miniconda3
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-        /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3.v2
-        export PATH="/opt/miniconda3.v2/bin:$PATH"
-        /opt/miniconda3.v2/bin/conda upgrade -q --all -y
-        /opt/miniconda3.v2/bin/conda install -q -y anaconda-navigator
-        rm Miniconda3-latest-Linux-x86_64.sh
-        chown -R -v {{ username }}:root /opt/miniconda3.v2
-        touch /opt/miniconda3.v2/.core4_installed
-        ln -s /opt/miniconda3.v2 /opt/miniconda3
-    - creates: /opt/miniconda3.v2/.core4_installed
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
+        bash /tmp/miniconda.sh -b -p /home/{{ username }}/miniconda3
+        export PATH="/home/{{ username }}/miniconda3/bin:$PATH"
+        /home/{{ username }}/miniconda3/bin/conda upgrade -q --all -y
+        /home/{{ username }}/miniconda3/bin/conda install -q -y anaconda-navigator
+        rm /tmp/miniconda.sh
+        touch /home/{{ username }}/miniconda3/.core4_installed
+    - runas: {{ username }}
+    - require:
+      - cmd: conda_opt_uninstall
+    - creates: /home/{{ username }}/miniconda3/.core4_installed
+
 
 /usr/share/applications/anaconda-navigator.desktop:
   file.managed:
@@ -23,9 +30,9 @@ conda_install:
         Version=1.0
         Type=Application
         Name=Anaconda Navigator
-        Icon=/opt/miniconda3/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda.png
+        Icon=/home/{{ username }}/miniconda3/lib/python3.7/site-packages/anaconda_navigator/static/images/anaconda.png
         Categories=Development;IDE;
-        Exec=/opt/miniconda3/bin/python /opt/miniconda3/bin/anaconda-navigator
+        Exec=/home/{{ username }}/miniconda3/bin/python /home/{{ username }}/miniconda3/bin/anaconda-navigator
         Terminal=false
         StartupWMClass=Anaconda-Navigator
 
@@ -35,7 +42,7 @@ conda_install:
     - contents: |
         #!/bin/bash
 
-        CONDA=/opt/miniconda3.v2/bin
+        CONDA=/home/{{ username }}/miniconda3/bin
         OLD_PATH=$PATH
         PATH=$CONDA:$OLD_PATH
         type deactivate >/dev/null 2>&1
