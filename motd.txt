@@ -7,6 +7,8 @@ what's new ...
 
     2019 Sept 18 10:19am
     * added MongoDB Compass Community Edition
+    * added chromium browser
+    * fixed Miniconda setup
 
     2019 May 18 10:45pm
     * fix mongodb up/down
