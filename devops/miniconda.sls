@@ -6,13 +6,13 @@ conda_install:
         test -d /opt/miniconda3 && rm -Rf /opt/miniconda3
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
         /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3.v2
-        ln -s /opt/miniconda3.v2 /opt/miniconda3
-        export PATH="/opt/miniconda3/bin:$PATH"
+        export PATH="/opt/miniconda3.v2/bin:$PATH"
         /opt/miniconda3/bin/conda upgrade -q --all -y
         /opt/miniconda3/bin/conda install -q -y anaconda-navigator
         rm Miniconda3-latest-Linux-x86_64.sh
         chown -R -v {{ username }}:root /opt/miniconda3.v2
         touch /opt/miniconda3.v2/.core4_installed
+        ln -s /opt/miniconda3.v2 /opt/miniconda3
     - creates: /opt/miniconda3.v2/.core4_installed
 
 /usr/share/applications/anaconda-navigator.desktop:
