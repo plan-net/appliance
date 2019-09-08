@@ -48,9 +48,9 @@ It features:
     * preinstalled ${HL}core3 and core4os${NC} sources
 
 Installation will take several minutes.
-Grab a cop of coffee while you go!
+So, grab a cup of coffee while you go!
 
-Press <RETURN> to continue (or CTRL-C to quit) ... "
+Press ${HL}<RETURN>${NC} to continue (or CTRL-C to quit) ... "
 read
 if [ -n "$SUDO_USER" ]; then
     USER="$SUDO_USER"
