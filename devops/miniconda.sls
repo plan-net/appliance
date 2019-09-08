@@ -8,7 +8,7 @@ conda_install:
         /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3.v2
         ln -s /opt/miniconda3.v2 /opt/miniconda3
         export PATH="/opt/miniconda3/bin:$PATH"
-        /opt/miniconda3/bin/conda upgrade --all -y
+        /opt/miniconda3/bin/conda upgrade -q --all -y
         /opt/miniconda3/bin/conda install -q -y anaconda-navigator
         rm Miniconda3-latest-Linux-x86_64.sh
         chown -R -v {{ username }}:root /opt/miniconda3.v2
