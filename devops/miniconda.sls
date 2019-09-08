@@ -3,7 +3,7 @@
 conda_install:
   cmd.run:
     - name: |
-        rm -Rf /opt/miniconda3
+        test -d /opt/miniconda3 && rm -Rf /opt/miniconda3
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
         /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3.v2
         ln -s /opt/miniconda3.v2 /opt/miniconda3
