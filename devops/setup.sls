@@ -4,7 +4,7 @@ include:
   - .robo3t
   - .pycharm
   - .postman
-  - .miniconda
+  # - .miniconda
   - .hosts
   - .salt
   - .mongo
