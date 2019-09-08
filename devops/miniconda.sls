@@ -7,8 +7,8 @@ conda_install:
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
         /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3.v2
         export PATH="/opt/miniconda3.v2/bin:$PATH"
-        /opt/miniconda3/bin/conda upgrade -q --all -y
-        /opt/miniconda3/bin/conda install -q -y anaconda-navigator
+        /opt/miniconda3.v2/bin/conda upgrade -q --all -y
+        /opt/miniconda3.v2/bin/conda install -q -y anaconda-navigator
         rm Miniconda3-latest-Linux-x86_64.sh
         chown -R -v {{ username }}:root /opt/miniconda3.v2
         touch /opt/miniconda3.v2/.core4_installed
