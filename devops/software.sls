@@ -40,4 +40,5 @@ compass:
     - name: |
         wget https://downloads.mongodb.com/compass/mongodb-compass-community_1.19.12_amd64.deb
         dpkg -i mongodb-compass-community_1.19.12_amd64.deb
+        rm mongodb-compass-community_1.19.12_amd64.deb
     - creates: /usr/bin/mongodb-compass-community

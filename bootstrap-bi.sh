@@ -4,22 +4,54 @@
 # bash bootstrap-bi.sh
 
 if (( $EUID != 0 )); then
-    echo "restarting as root..."
+    echo "restarting as sudoer, please enter your password ..."
     su -c "cd $PWD; /bin/bash $0"
     exit
 fi
 
-echo "
-██████╗ ███╗   ██╗     ██████╗ ██╗    ██╗   ██╗██████╗
-██╔══██╗████╗  ██║     ██╔══██╗██║    ██║   ██║██╔══██╗
-██████╔╝██╔██╗ ██║     ██████╔╝██║    ██║   ██║██████╔╝
-██╔═══╝ ██║╚██╗██║     ██╔══██╗██║    ╚██╗ ██╔╝██╔══██╗
-██║     ██║ ╚████║ ██╗ ██████╔╝██║     ╚████╔╝ ██████╔╝
-╚═╝     ╚═╝  ╚═══╝ ╚═╝ ╚═════╝ ╚═╝      ╚═══╝  ╚═════╝
-VERSION 1.1
+HL='\033[1;32m'
+DG='\033[1;30m'
+G='\u001b[38;5;22m'
+NC='\033[0m' # No Color
 
-"
+clear
+printf "${G}
+ ▄▄▄·▄▄▌   ▄▄▄·  ▐ ▄     ▐ ▄ ▄▄▄ .▄▄▄▄▄    ▄▄▄▄· ▪
+▐█ ▄███•  ▐█ ▀█ •█▌▐█   •█▌▐█▀▄.▀·•██      ▐█ ▀█▪██
+ ██▀·██▪  ▄█▀▀█ ▐█▐▐▌   ▐█▐▐▌▐▀▀▪▄ ▐█.▪    ▐█▀▀█▄▐█·
+▐█▪·•▐█▌▐▌▐█ ▪▐▌██▐█▌   ██▐█▌▐█▄▄▌ ▐█▌·    ██▄▪▐█▐█▌
+.▀   .▀▀▀  ▀  ▀ ▀▀ █▪ ▀ ▀▀ █▪ ▀▀▀  ▀▀▀     ·▀▀▀▀ ▀▀▀
+ ▄▄▄·  ▄▄▄· ▄▄▄·▄▄▌  ▪   ▄▄▄·  ▐ ▄  ▄▄· ▄▄▄ .
+▐█ ▀█ ▐█ ▄█▐█ ▄███•  ██ ▐█ ▀█ •█▌▐█▐█ ▌▪▀▄.▀·
+▄█▀▀█  ██▀· ██▀·██▪  ▐█·▄█▀▀█ ▐█▐▐▌██ ▄▄▐▀▀▪▄
+▐█ ▪▐▌▐█▪·•▐█▪·•▐█▌▐▌▐█▌▐█ ▪▐▌██▐█▌▐███▌▐█▄▄▌
+ ▀  ▀ .▀   .▀   .▀▀▀ ▀▀▀ ▀  ▀ ▀▀ █▪·▀▀▀  ▀▀▀
+VERSION 1.2${NC}
 
+This script will setup your Debian virtualbox.
+
+It features:
+
+    * various ${HL}utilities${NC}, i.e. git, curl, wget, mc, htop, gcc, tmux, screen
+    * ${HL}zsh${NC} exptended Bourne shell, including the ${HL}Powerlevel9k${NC} theme for zsh
+    * ${HL}Pycharm${NC}, the Python Integrated Development Environment
+    * a local ${HL}MongoDB server${NC} instance
+    * ${HL}Robo3T${NC} and MongoDB ${HL}Compass${NC} clients
+    * ${HL}Postman${NC}, the API development environment
+    * Miniconda3, the lightweight installation of ${HL}Anaconda${NC} Data Science Platform
+    * ${HL}Python3${NC} virtual environments including all essential development files
+    * ${HL}Chromium${NC}, the Open-Source browser
+    * ${HL}Gimp${NC}, the GNU Image Manipulation Program
+    * ${HL}Meld${NC}, the graphical diff tool
+    * hostnames of Plan.Net BI ${HL}clusters at AWS and SP${NC}, including ssh tweaks
+    * various ${HL}Desktop tweaks${NC} to make your life easier
+    * preinstalled ${HL}core3 and core4os${NC} sources
+
+Installation will take several minutes.
+Grab a cop of coffee while you go!
+
+Press <RETURN> to continue (or CTRL-C to quit) ... "
+read
 if [ -n "$SUDO_USER" ]; then
     USER="$SUDO_USER"
 else
