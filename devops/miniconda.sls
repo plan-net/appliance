@@ -11,9 +11,9 @@ conda_install:
         /opt/miniconda3/bin/conda upgrade --all -y
         /opt/miniconda3/bin/conda install -q -y anaconda-navigator
         rm Miniconda3-latest-Linux-x86_64.sh
-        chown -R -v {{ username }}:root /opt/miniconda3
-        touch /opt/miniconda3/.core4_installed
-    - creates: /opt/miniconda3/.core4_installed
+        chown -R -v {{ username }}:root /opt/miniconda3.v2
+        touch /opt/miniconda3.v2/.core4_installed
+    - creates: /opt/miniconda3.v2/.core4_installed
 
 /usr/share/applications/anaconda-navigator.desktop:
   file.managed:
