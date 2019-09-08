@@ -15,7 +15,7 @@ sleep-inactive-ac-type='nothing'
 sleep-inactive-battery-timeout=1800
 
 [org/gnome/shell]
-favorite-apps=['chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'jetbrains-pycharm-ce.desktop', 'robo3t.desktop', 'anaconda-navigator.desktop', 'postman.desktop', 'libreoffice-calc.desktop', 'org.gnome.Software.desktop']
+favorite-apps=['chromium.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'jetbrains-pycharm-ce.desktop', 'robo3t.desktop', 'anaconda-navigator.desktop', 'postman.desktop', 'libreoffice-calc.desktop', 'org.gnome.Software.desktop']
 enabled-extensions=['alternate-tab@gnome-shell-extensions.gcampax.github.com']
 
 [org/gnome/shell/window-switcher]
