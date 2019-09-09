@@ -7,7 +7,7 @@ only Debian 9 is supported at the moment.
 
 The appliance ships with the following features:
 
-* various utilities, i.e. git, curl, wget, mc, htop, gcc, tmux, screen
+* various utilities, i.e. git, curl, wget, mc, htop, gcc, tmux, screen, yarn
 * zsh extended Bourne shell, including the Powerlevel9k theme for zsh
 * Pycharm, the Python Integrated Development Environment
 * a local MongoDB server instance

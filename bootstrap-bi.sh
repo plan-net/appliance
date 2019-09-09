@@ -32,7 +32,7 @@ This script will setup your Debian virtualbox.
 
 It features:
 
-    * various ${HL}utilities${NC}, i.e. git, curl, wget, mc, htop, gcc, tmux, screen
+    * various ${HL}utilities${NC}, i.e. git, curl, wget, mc, htop, gcc, tmux, screen, yarn
     * ${HL}zsh${NC} extended Bourne shell, including the ${HL}Powerlevel9k${NC} theme for zsh
     * ${HL}Pycharm${NC}, the Python Integrated Development Environment
     * a local ${HL}MongoDB server${NC} instance

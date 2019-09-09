@@ -42,3 +42,21 @@ compass:
         dpkg -i mongodb-compass-community_1.19.12_amd64.deb
         rm mongodb-compass-community_1.19.12_amd64.deb
     - creates: /usr/bin/mongodb-compass-community
+
+nodejs:
+  cmd.run:
+    - name: |
+        curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+        apt-get install -y nodejs
+    - creates: /usr/bin/nodejs
+
+yarn:
+  cmd.run:
+    - name: |
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        apt update
+        apt install yarn
+    - creates: /usr/bin/yarn
+    - require:
+      - cmd: nodejs
