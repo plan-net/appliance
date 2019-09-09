@@ -5,7 +5,10 @@ VirtualBox Appliance
 
 what's new ...
 
-    2019 Sept 18 10:19am
+    2019 Sept 9 12:04am
+    * added nodejs and yarn
+
+    2019 Sept 8 10:19am
     * added MongoDB Compass Community Edition
     * added chromium browser
     * fixed Miniconda setup
