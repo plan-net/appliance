@@ -37,7 +37,8 @@ try:
 except:
     print("no connection...\n... cannot check for upgrades!\nskip")
     sys.exit()
-if out != "" or exists(".upgrade"):
+
+if out != "" or exists(UPDATE_FILE):
     print()
     print("==============================")
     print("Plan.Net Business Intelligence")

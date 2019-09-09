@@ -33,16 +33,14 @@ This script will setup your Debian virtualbox.
 It features:
 
     * various ${HL}utilities${NC}, i.e. git, curl, wget, mc, htop, gcc, tmux, screen
-    * ${HL}zsh${NC} exptended Bourne shell, including the ${HL}Powerlevel9k${NC} theme for zsh
+    * ${HL}zsh${NC} extended Bourne shell, including the ${HL}Powerlevel9k${NC} theme for zsh
     * ${HL}Pycharm${NC}, the Python Integrated Development Environment
     * a local ${HL}MongoDB server${NC} instance
-    * ${HL}Robo3T${NC} and MongoDB ${HL}Compass${NC} clients
+    * ${HL}Robo3T${NC} and MongoDB ${HL}Compass${NC} client
     * ${HL}Postman${NC}, the API development environment
     * Miniconda3, the lightweight installation of ${HL}Anaconda${NC} Data Science Platform
-    * ${HL}Python3${NC} virtual environments including all essential development files
-    * ${HL}Chromium${NC}, the Open-Source browser
-    * ${HL}Gimp${NC}, the GNU Image Manipulation Program
-    * ${HL}Meld${NC}, the graphical diff tool
+    * ${HL}Chromium${NC}, the Open-Source browser, ${HL}Gimp${NC}, the GNU Image
+      Manipulation Program, ${HL}Meld${NC}, the graphical diff tool
     * hostnames of Plan.Net BI ${HL}clusters at AWS and SP${NC}, including ssh tweaks
     * various ${HL}Desktop tweaks${NC} to make your life easier
     * preinstalled ${HL}core3 and core4os${NC} sources
@@ -52,6 +50,7 @@ So, grab a cup of coffee while you go!
 
 Press ${HL}<RETURN>${NC} to continue (or CTRL-C to quit) ... "
 read
+echo ""
 if [ -n "$SUDO_USER" ]; then
     USER="$SUDO_USER"
 else
@@ -62,6 +61,12 @@ USERHOME="/home/$USER"
 test -d "$USERHOME/.pnbi_salt" || mkdir "$USERHOME/.pnbi_salt"
 chown $USER:$USER "$USERHOME/.pnbi_salt"
 cd "$USERHOME/.pnbi_salt"
+
+if [[ $# -eq 0 ]] ; then
+    BRANCH="master"
+else
+    BRANCH="$1"
+fi
 
 if ! [ -x "$(command -v salt-minion)" ]; then
     echo "installing saltstack"
@@ -82,6 +87,9 @@ else
     git pull
     cd ..
 fi
+cd appliance
+git checkout -f "$BRANCH"
+cd ..
 
 rm $USERHOME/.pnbi_salt/.update
 salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l info --local --state-output=changes state.apply setup 2>&1 | tee $USERHOME/salt_call.log
