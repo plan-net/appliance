@@ -5,7 +5,7 @@
 
 if (( $EUID != 0 )); then
     echo "restarting as sudoer, please enter your password ..."
-    su -c "cd $PWD; /bin/bash $0"
+    su -c "cd $PWD; /bin/bash $0 $*"
     exit
 fi
 
