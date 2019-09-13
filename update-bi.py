@@ -49,15 +49,16 @@ if out != "" or exists(UPDATE_FILE):
     print()
     print("=> your devops station requires upgrades !\n")
     print()
-    print("NOTE: as a core operator it is your responsibility to upgrade")
+    print("NOTE: as a core user it is your responsibility to upgrade")
     print("      your workstation regularly and in time. Upgrades include")
     print("      important security patches as well as productivity tools.")
     print()
     out = check_output([
         "git", "--no-pager", "log",
         "--pretty=format:'%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset'",
-        "master..origin/master"])
-    print(out)
+        "master..origin/master"]).decode("utf-8").strip()
+    if out:
+        print(out)
     while True:
         print("do you want to upgrade now [y/n]: ", end="")
         inp = input().lower().strip()
