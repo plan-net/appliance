@@ -14,6 +14,12 @@ DG='\033[1;30m'
 G='\u001b[38;5;22m'
 NC='\033[0m' # No Color
 
+if [[ $# -eq 0 ]] ; then
+    BRANCH="master"
+else
+    BRANCH="$1"
+fi
+
 clear
 printf "${G}
  ▄▄▄·▄▄▌   ▄▄▄·  ▐ ▄     ▐ ▄ ▄▄▄ .▄▄▄▄▄    ▄▄▄▄· ▪
@@ -28,7 +34,7 @@ printf "${G}
  ▀  ▀ .▀   .▀   .▀▀▀ ▀▀▀ ▀  ▀ ▀▀ █▪·▀▀▀  ▀▀▀
 VERSION 1.2${NC}
 
-This script will setup your Debian virtualbox.
+This script will setup your Debian virtualbox (appliance branch $BRANCH)
 
 It features:
 
@@ -62,12 +68,6 @@ test -d "$USERHOME/.pnbi_salt" || mkdir "$USERHOME/.pnbi_salt"
 chown $USER:$USER "$USERHOME/.pnbi_salt"
 cd "$USERHOME/.pnbi_salt"
 
-if [[ $# -eq 0 ]] ; then
-    BRANCH="master"
-else
-    BRANCH="$1"
-fi
-
 if ! [ -x "$(command -v salt-minion)" ]; then
     echo "installing saltstack"
     wget -O bootstrap-salt.sh https://bootstrap.saltstack.com
@@ -91,7 +91,7 @@ cd appliance
 git checkout -f "$BRANCH"
 cd ..
 
-rm $USERHOME/.pnbi_salt/.update
+test -f $USERHOME/.pnbi_salt/.update && rm $USERHOME/.pnbi_salt/.update
 salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l info --local --state-output=changes state.apply setup 2>&1 | tee $USERHOME/salt_call.log
 chown $USER:$USER $USERHOME/salt_call.log
 chmod 777 $USERHOME/salt_call.log
