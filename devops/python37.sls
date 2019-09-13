@@ -11,7 +11,12 @@ python37_download:
 
 configure_python37:
   cmd.run:
-    - name: ./configure --enable-optimizations
+    #- name: ./configure --enable-optimizations
+    # we disabled optimizations here, as it will take 30min+ enabling them,
+    # resulting in a only ~10% performance boost.
+    # As this is a development environment mostly used with active debugger
+    # anyway, we can skip this.
+    - name: ./configure
     - unless: which python3.7
     - cwd: /tmp/Python3.7/Python-3.7.4
 
