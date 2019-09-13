@@ -39,8 +39,9 @@ except:
     sys.exit()
 
 if out != "" or exists(UPDATE_FILE):
+    do_update()
     print("get upgrade")
-    check_call(["git", "pull"])
+    check_call(["git", "fetch"])
     print()
     print("==============================")
     print("Plan.Net Business Intelligence")
@@ -52,17 +53,22 @@ if out != "" or exists(UPDATE_FILE):
     print("      your workstation regularly and in time. Upgrades include")
     print("      important security patches as well as productivity tools.")
     print()
+    out = check_output([
+        "git", "--no-pager", "log",
+        "--pretty=format:'%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset'",
+        "master..origin/master"])
+    print(out)
     while True:
         print("do you want to upgrade now [y/n]: ", end="")
         inp = input().lower().strip()
         if inp == "y":
-            do_update()
             break
         elif inp == "n":
             sys.exit(1)
 
 if exists(UPDATE_FILE):
     chdir(worktree)
+    check_call(["git", "pull"])
     print("run upgrade")
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
@@ -84,7 +90,6 @@ if exists(UPDATE_FILE):
                 if int(line.split()[1]) > 0:
                     error = True
     print()
-    print(open(join(worktree, "motd.txt"), "r").read())
     if error:
         print()
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
