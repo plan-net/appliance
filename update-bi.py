@@ -58,7 +58,8 @@ if out != "" or exists(UPDATE_FILE):
         "--pretty=format:'%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset'",
         "master..origin/master"]).decode("utf-8").strip()
     if out:
-        print(out)
+        sys.stdout.write(out)
+        print()
     while True:
         print("do you want to upgrade now [y/n]: ", end="")
         inp = input().lower().strip()
