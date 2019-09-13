@@ -58,7 +58,10 @@ if out != "" or exists(UPDATE_FILE):
         "--pretty=format:'%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset'",
         "master..origin/master"]).decode("utf-8").strip()
     if out:
-        lines = [i for i in out.split("\n") if not i.strip().startswith("#")]
+        print("CHANGES:")
+        print()
+        lines = ["  " + i for i in out.split("\n")
+                 if not i.strip().startswith("#")]
         sys.stdout.write("\n".join(lines))
         print()
     while True:
