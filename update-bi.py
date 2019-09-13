@@ -40,6 +40,8 @@ except:
     sys.exit()
 
 if out != "" or exists(UPDATE_FILE):
+    print("get  upgrade")
+    check_call(["git", "pull"])
     print()
     print("==============================")
     print("Plan.Net Business Intelligence")
@@ -66,7 +68,6 @@ if out != "" or exists(UPDATE_FILE):
 if exists(UPDATE_FILE):
     chdir(worktree)
     print("run upgrade")
-    check_call(["git", "pull"])
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
     cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
