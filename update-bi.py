@@ -64,6 +64,7 @@ if out != "" or exists(UPDATE_FILE):
                  if not i.strip().startswith("#")]
         sys.stdout.write("\n".join(lines))
         print()
+        print()
     while True:
         print("do you want to upgrade now [y/n]: ", end="")
         inp = input().lower().strip()
