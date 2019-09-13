@@ -99,7 +99,7 @@ if exists(UPDATE_FILE):
                 if int(line.split()[1]) > 0:
                     error = True
     print()
-    print("RUNTIME: %s" % datetime.datetime.now() - t0)
+    print("RUNTIME:", datetime.datetime.now() - t0)
     if error:
         print()
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
