@@ -9,6 +9,7 @@ home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
 worktree = join(pnbi, "appliance")
 UPDATE_FILE = join(pnbi, ".upgrade")
+UPDATE_TEXT = join(worktree, "update.txt")
 username = getlogin()
 
 
@@ -50,6 +51,9 @@ if out != "" or exists(UPDATE_FILE):
     print("      your workstation regularly and in time. Upgrades include")
     print("      important security patches as well as productivity tools.")
     print()
+    if exists(UPDATE_TEXT):
+        print(open(UPDATE_TEXT, "r").read())
+        print()
     while True:
         print("do you want to upgrade now [y/n]: ", end="")
         inp = input().lower().strip()

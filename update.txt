@@ -1,0 +1,8 @@
+IMPORTANT NOTE
+==============
+
+This upgrade install Python version 3.7 and will take a while. We suggest you
+run this update during lunch or night.
+
+If you select "NO" now, then can start the upgrade later when you start a new
+Terminal session.
