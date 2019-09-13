@@ -28,9 +28,9 @@ configure_python37:
         echo d33e4aae66097051c2eca45ee3604803 Python-3.7.4.tar.xz | md5sum --check - || exit 1
         tar -xvf Python-3.7.4.tar.xz
         cd Python-3.7.4
-        #./configure  # --enable-optimizations
-        #make
-        #make altinstall
+        ./configure  # --enable-optimizations
+        make
+        make altinstall
         rm -Rf /tmp/install_python3.7
     - unless: which python3.7
     - require:
