@@ -4,6 +4,7 @@ from subprocess import check_output, check_call, STDOUT
 from os.path import expanduser, abspath, join, exists
 from os import chdir, system, unlink, makedirs, getlogin
 import sys
+import datetime
 
 home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
@@ -74,6 +75,7 @@ if out != "" or exists(UPDATE_FILE):
             sys.exit(1)
 
 if exists(UPDATE_FILE):
+    t0 = datetime.datetime.now()
     chdir(worktree)
     check_call(["git", "pull"])
     print("run upgrade")
@@ -97,6 +99,7 @@ if exists(UPDATE_FILE):
                 if int(line.split()[1]) > 0:
                     error = True
     print()
+    print("RUNTIME: %s" % datetime.datetime.now() - t0)
     if error:
         print()
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
