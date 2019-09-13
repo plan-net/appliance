@@ -14,17 +14,6 @@ install_python37_requirements:
       - libffi-dev
       - zlib1g-dev
 
-python37_download:
-  archive:
-    - unless: which python3.7
-    - extracted
-    - name: /tmp/Python3.7
-    - source: https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz
-    - source_hash: md5=d33e4aae66097051c2eca45ee3604803
-    - archive_format: tar
-    - tar_options: z
-    - keep: false
-
 configure_python37:
   cmd.run:
     #- name: ./configure --enable-optimizations
@@ -33,9 +22,17 @@ configure_python37:
     # As this is a development environment mostly used with active debugger
     # anyway, we can skip this.
     - name: |
-        cd /tmp/Python3.7/Python-3.7.4
-        ./configure  # --enable-optimizations
-        make
-        make altinstall
+        mkdir /tmp/install_python3.7
+        cd /tmp/install_python3.7
+        wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz
+        echo d33e4aae66097051c2eca45ee3604803 Python-3.7.4.tar.xz | md5sum --check - || exit 1
+        tar -xvf Python-3.7.4.tar.xz
+        cd Python-3.7.4
+        #./configure  # --enable-optimizations
+        #make
+        #make altinstall
+        rm -Rf /tmp/install_python3.7
+    - unless: which python3.7
     - require:
-      - archive: python37_download
+      - install_python37_requirements
+
