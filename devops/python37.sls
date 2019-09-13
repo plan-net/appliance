@@ -32,19 +32,10 @@ configure_python37:
     # resulting in a only ~10% performance boost.
     # As this is a development environment mostly used with active debugger
     # anyway, we can skip this.
-    - name: ./configure
-    - unless: which python3.7
-    - cwd: /tmp/Python3.7/Python-3.7.4
-
-make_python37:
-  cmd.run:
-    - name: make
-    - unless: which python3.7
-    - cwd: /tmp/Python3.7/Python-3.7.4
-
-install_python37:
-  cmd.run:
-    - name: make altinstall
-    - unless: which python3.7
-    - cwd: /tmp/Python3.7/Python-3.7.4
-
+    - name: |
+        cd /tmp/Python3.7/Python-3.7.4
+        ./configure  # --enable-optimizations
+        make
+        make altinstall
+    - require:
+      - archive: python37_download

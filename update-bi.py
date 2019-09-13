@@ -40,7 +40,7 @@ except:
     sys.exit()
 
 if out != "" or exists(UPDATE_FILE):
-    print("get  upgrade")
+    print("get upgrade")
     check_call(["git", "pull"])
     print()
     print("==============================")
