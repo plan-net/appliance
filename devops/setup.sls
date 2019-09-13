@@ -12,6 +12,6 @@ include:
   - .ssh
   - .powerlevel9k
   - .zsh
-  #- .python37
+  - .python37
   - .core4
   - .core3
