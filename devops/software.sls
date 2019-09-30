@@ -26,6 +26,7 @@ system_prerequisites:
       - libappindicator3-1
       - meld
       - python-tk
+      - libcanberra-gtk-module
       - chromium
 
 # chrome:
