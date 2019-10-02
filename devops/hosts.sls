@@ -25,6 +25,7 @@ cleanup_hosts_2:
     - marker_end: "# DO NOT EDIT - end of devops"
     - append_if_not_found: True
     - content: |
+        127.0.0.1       testmongo
         10.249.1.70     pnbi_mongodb1 mongodb1
         10.249.1.71     pnbi_mongodb2 mongodb2
 
