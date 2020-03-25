@@ -59,6 +59,11 @@ cleanup_hosts_2:
         10.249.1.104    app1.spm
         10.249.2.25     proxy.spm
 
+        10.249.1.160    app1.staging
+        10.249.1.161    worker1.staging
+        10.249.1.162    mongodb.staging
+        
+
         35.158.149.95   core4_proxy
 
     - show_changes: True
