@@ -62,8 +62,18 @@ cleanup_hosts_2:
         10.249.1.160    app1.staging
         10.249.1.161    worker1.staging
         10.249.1.162    mongodb.staging
-        
+
 
         35.158.149.95   core4_proxy
+
+        # stage (aws)
+
+        10.249.240.6    salt.stage          # master IN stage
+        10.249.240.7    mongodb.stage       # mongodb IN stage
+        10.249.240.153  app1.stage          # app IN stage
+        10.249.240.100  app2.stage          # app IN stage
+        10.249.240.212  worker1.stage       # worker IN stage
+        10.249.240.194  worker2.stage       # worker IN stage
+        10.249.240.31   proxy.stage         # proxy IN stage
 
     - show_changes: True

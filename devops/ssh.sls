@@ -44,4 +44,7 @@ cleanup_ssh_config_2:
 
         Host *.aws
             ProxyCommand ssh -W %h:%p 35.158.149.95
+
+        Host *.stage
+            ProxyCommand ssh -W %h:%p salt.spm
     - show_changes: True
