@@ -25,6 +25,7 @@ cleanup_hosts_2:
     - marker_end: "# DO NOT EDIT - end of devops"
     - append_if_not_found: True
     - content: |
+
         127.0.0.1       testmongo
         10.249.1.70     pnbi_mongodb1 mongodb1
         10.249.1.71     pnbi_mongodb2 mongodb2
@@ -40,7 +41,6 @@ cleanup_hosts_2:
 
         10.249.1.51     pnbi_jira_psql jira_psql
 
-        10.249.2.2      pnbi_sftp1 sftp1
         10.249.2.3      pnbi_proxyExt proxyExt
         10.249.2.4      pnbi_postgresExt postgresExt
         10.249.2.5      pnbi_jira jira
@@ -57,23 +57,17 @@ cleanup_hosts_2:
         10.249.1.101    worker1.spm
         10.249.1.103    worker2.spm
         10.249.1.104    app1.spm
+        10.249.1.141    app2.spm
         10.249.2.25     proxy.spm
 
         10.249.1.160    app1.staging
         10.249.1.161    worker1.staging
         10.249.1.162    mongodb.staging
+        10.249.2.30     proxy.staging
 
-
-        35.158.149.95   core4_proxy
-
-        # stage (aws)
-
-        10.249.240.6    salt.stage          # master IN stage
-        10.249.240.7    mongodb.stage       # mongodb IN stage
-        10.249.240.153  app1.stage          # app IN stage
-        10.249.240.100  app2.stage          # app IN stage
-        10.249.240.212  worker1.stage       # worker IN stage
-        10.249.240.194  worker2.stage       # worker IN stage
-        10.249.240.31   proxy.stage         # proxy IN stage
+        10.249.1.165    bi_connector.spm
+        10.249.240.129  jupyter.spm
+        10.249.2.73     sftp.spm
+        10.249.1.166    tableau1.spm
 
     - show_changes: True
