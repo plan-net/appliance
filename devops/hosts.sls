@@ -29,6 +29,8 @@ cleanup_hosts_2:
         127.0.0.1       testmongo
         10.249.1.70     pnbi_mongodb1 mongodb1
         10.249.1.71     pnbi_mongodb2 mongodb2
+        10.249.1.3      pnbi_mongodb_rs2 mongodb_rs2
+        10.249.1.4      pnbi_mongodb_rs3 mongodb_rs3
 
         10.249.1.6      pnbi_worker1 worker1
         10.249.1.11     pnbi_worker2 worker2
