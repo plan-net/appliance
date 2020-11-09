@@ -12,7 +12,5 @@ include:
   - .desktop
   - .powerlevel9k
   - .zsh
-  #- .chrome
-  #- .python37
-  #- .core4
+  - .core4
   #- .core3
