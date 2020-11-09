@@ -47,4 +47,10 @@ cleanup_ssh_config_2:
 
         Host *.stage
             ProxyCommand ssh -W %h:%p salt.spm
+
+        Host *.staging
+            ProxyCommand ssh -W %h:%p salt.spm
+
+        Host *.spm
+            ProxyCommand ssh -W %h:%p salt.spm
     - show_changes: True
