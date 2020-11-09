@@ -14,20 +14,20 @@ system_prerequisites:
       - wget
       - mc
       - htop
-      - gimp
+      #- gimp
       - runit
       - runit-systemd
       - zsh
-      - python3-venv
+      #- python3-venv
       - libgconf-2-4
-      - python3-dev
-      - python-dev
+      #- python3-dev
+      #- python-dev
       - build-essential
       - libappindicator3-1
-      - meld
+      #- meld
       - python-tk
       - libcanberra-gtk-module
-      - chromium
+      #- chromium
 
 # chrome:
 #   cmd.run:
@@ -36,13 +36,13 @@ system_prerequisites:
 #         dpkg -i google-chrome-stable_current_amd64.deb
 #     - creates: /usr/bin/google-chrome
 
-compass:
-  cmd.run:
-    - name: |
-        wget https://downloads.mongodb.com/compass/mongodb-compass-community_1.19.12_amd64.deb
-        dpkg -i mongodb-compass-community_1.19.12_amd64.deb
-        rm mongodb-compass-community_1.19.12_amd64.deb
-    - creates: /usr/bin/mongodb-compass-community
+#compass:
+#  cmd.run:
+#    - name: |
+#        wget https://downloads.mongodb.com/compass/mongodb-compass-community_1.19.12_amd64.deb
+#        dpkg -i mongodb-compass-community_1.19.12_amd64.deb
+#        rm mongodb-compass-community_1.19.12_amd64.deb
+#    - creates: /usr/bin/mongodb-compass-community
 
 nodejs:
   cmd.run:
