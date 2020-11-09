@@ -10,3 +10,9 @@ salt-minion:
     - group: {{ username }}
     - mode: 700
     - makedirs: True
+
+bi-installer:
+  file.managed:
+    - name: /usr/local/bin/bi-installer
+    - mode: 755
+    - source: salt://script/bi-installer.sh
