@@ -1,4 +1,4 @@
-install_python37_requirements:
+install_python38_requirements:
   pkg.installed:
     - pkgs:
       - build-essential
@@ -14,7 +14,7 @@ install_python37_requirements:
       - libffi-dev
       - zlib1g-dev
 
-configure_python37:
+configure_python38:
   cmd.run:
     #- name: ./configure --enable-optimizations
     # we disabled optimizations here, as it will take 30min+ enabling them,
@@ -22,17 +22,17 @@ configure_python37:
     # As this is a development environment mostly used with active debugger
     # anyway, we can skip this.
     - name: |
-        mkdir /tmp/install_python3.7
-        cd /tmp/install_python3.7
-        wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tar.xz
-        echo d33e4aae66097051c2eca45ee3604803 Python-3.7.4.tar.xz | md5sum --check - || exit 1
-        tar -xvf Python-3.7.4.tar.xz
-        cd Python-3.7.4
-        ./configure  # --enable-optimizations
+        mkdir /tmp/install_python3.8
+        cd /tmp/install_python3.8
+        wget https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz
+        echo ea132d6f449766623eee886966c7d41f Python-3.8.6.tgz | md5sum --check - || exit 1
+        tar -xvf Python-3.8.6.tgz
+        cd Python-3.8.6
+        ./configure --enable-optimizations
         make
         make altinstall
-        rm -Rf /tmp/install_python3.7
-    - unless: which python3.7
+        rm -Rf /tmp/install_python3.8
+    - unless: which python3.8
     - require:
-      - install_python37_requirements
+      - install_python38_requirements
 
