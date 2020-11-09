@@ -11,7 +11,7 @@ home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
 worktree = join(pnbi, "appliance")
 UPDATE_FILE = join(pnbi, ".upgrade")
-INSTALLED_MODULES = join(pnbi, "installed-modules/*.sls")
+INSTALLED_MODULES = join(pnbi, "installed-modules/*")
 
 username = getlogin()
 
