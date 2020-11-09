@@ -68,14 +68,14 @@ if exists(UPDATE_FILE):
     chdir(worktree)
     check_call(["git", "pull"])
     print("run upgrade")
-    cmd = "sudo truncate --size {home}/salt_call.log".format(home=home)
+    cmd = "sudo truncate --size 0 {home}/salt_call.log".format(home=home)
     system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
-    module = ["setup"] + [basename(m) for m in glob(INSTALLED_MODULES)]
+    module = ["setup"] + ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
     for mod in module:
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
-              "--state-output=changes state.apply module/{module} test=true 2>&1 " \
+              "--state-output=changes state.apply {module} test=true 2>&1 " \
               "| tee -a {home}/salt_call.log".format(
             worktree=worktree, home=home, module=mod)
         system(cmd)
