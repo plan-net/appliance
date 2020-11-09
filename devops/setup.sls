@@ -2,16 +2,17 @@ include:
   - .software
   - .users
   - .robo3t
-  - .pycharm
+  #- .pycharm
   - .postman
-  - .miniconda
+  #- .miniconda
   - .hosts
+  - .ssh
   - .salt
   - .mongo
   - .desktop
-  - .ssh
   - .powerlevel9k
   - .zsh
-  - .python37
-  - .core4
-  - .core3
+  #- .chrome
+  #- .python37
+  #- .core4
+  #- .core3
