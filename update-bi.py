@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-from subprocess import check_output, check_call, STDOUT
-from os.path import expanduser, abspath, join, exists, basename
-from os import chdir, system, unlink, makedirs, getlogin
-import sys
 import datetime
+import sys
 from glob import glob
+from os import chdir, system, unlink, makedirs, getlogin
+from os.path import expanduser, abspath, join, exists, basename
+from subprocess import check_output, check_call, STDOUT
 
 home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
