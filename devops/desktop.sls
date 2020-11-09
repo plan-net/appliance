@@ -2,7 +2,7 @@
 
 /opt/Linux-Wallpaper-24.png:
   file.managed:
-    - source: salt://asset/core4os_texture_wallpaper.png
+    - source: salt://asset/core4os_texture.png
 
 setup_desktop:
   cmd.script:
