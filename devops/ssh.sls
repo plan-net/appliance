@@ -2,10 +2,10 @@
 
 create_ssh_config:
   file.managed:
+    - if_missing: /home/{{ username }}/.ssh/config
     - name: /home/{{ username }}/.ssh/config
     - contents: |
         # default empty devops file
-    - creates: /home/{{ username }}/.ssh/config
 
 cleanup_ssh_config:
   file.replace:
