@@ -1,3 +1,5 @@
+{% set username = salt['environ.get']('SUDO_USER') or salt['environ.get']('USERNAME') %}
+
 salt-minion:
   service.dead:
     - enable: false
