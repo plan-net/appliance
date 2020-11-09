@@ -31,7 +31,7 @@ robo3t_archive:
         Encoding=UTF-8
         Version=1.0
         Type=Application
-        Name=Robo 3T - 1.2
+        Name=Robo 3T - 1.4
         Icon=/opt/robo3t/logo-256x256.png
         Exec=/opt/robo3t/bin/robo3t
         StartupNotify=false
