@@ -72,7 +72,9 @@ if exists(UPDATE_FILE):
     system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
-    module = ["setup"] + ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
+    module = ["setup"]
+    if exists(INSTALLED_MODULES):
+        module += ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
     for mod in module:
         print("\n***", mod, "\n")
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
@@ -100,4 +102,3 @@ if exists(UPDATE_FILE):
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
         print("!!! PLEASE CONTACT bi-ops@plan-net.com")
         print()
-
