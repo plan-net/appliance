@@ -1,4 +1,4 @@
-{% set version = "mongodb-linux-x86_64-debian92-4.0.5" %}
+{% set version = "mongodb-linux-x86_64-debian92-4.0.13" %}
 
 mongo_group:
   group.present:
@@ -39,7 +39,7 @@ mongo_archive:
     - extracted
     - name: /srv/
     - source: https://fastdl.mongodb.org/linux/{{ version }}.tgz
-    - source_hash: md5=dc547a5798c7f82c999035ca2c1adebf
+    - source_hash: md5=66905685ed6859c2fbe70de562917e7d
     - archive_format: tar
     - tar_options: z
     - keep: false
