@@ -76,7 +76,7 @@ if exists(UPDATE_FILE):
     for mod in module:
         print("\n***", mod, "\n")
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
-              "--state-output=changes state.apply {module} test=true 2>&1 " \
+              "--state-output=changes state.apply {module} 2>&1 " \
               "| tee -a {home}/salt_call.log".format(
             worktree=worktree, home=home, module=mod)
         system(cmd)
@@ -100,3 +100,4 @@ if exists(UPDATE_FILE):
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
         print("!!! PLEASE CONTACT bi-ops@plan-net.com")
         print()
+
