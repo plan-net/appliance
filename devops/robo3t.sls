@@ -1,4 +1,4 @@
-{% set version = "robo3t-1.4.2-linux-x86_64-8650949" %}
+{% set version = "robo3t-1.2.1-linux-x86_64-3e50a65" %}
 
 robomongo:
   pkg.purged
@@ -8,8 +8,8 @@ robo3t_archive:
     - if_missing: /opt/{{ version }}
     - extracted
     - name: /opt/
-    - source: https://github.com/Studio3T/robomongo/releases/download/v1.4.2/robo3t-1.4.2-linux-x86_64-8650949.tar.gz
-    - source_hash: md5=539860690c2dfa99f609efeec8669c56
+    - source: https://download.robomongo.org/1.2.1/linux/robo3t-1.2.1-linux-x86_64-3e50a65.tar.gz
+    - source_hash: md5=8e65429b6b81f096b822d7aeb80eb818
     - archive_format: tar
     - tar_options: z
     - keep: true
