@@ -22,7 +22,6 @@ fi
 if [ ! -f $MODULE ]; then
   echo "available modules:"
   ls "$AVAILABLE" | grep -E ".+\.sls$" | xargs -I {} basename {} .sls | sort 
-  ls "$MODULE"
   exit
 fi
 
