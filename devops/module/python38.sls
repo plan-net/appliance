@@ -13,6 +13,7 @@ install_python38_requirements:
       - libbz2-dev
       - libffi-dev
       - zlib1g-dev
+      - liblzma-dev
 
 configure_python38:
   cmd.run:
@@ -32,7 +33,9 @@ configure_python38:
         make
         make altinstall
         rm -Rf /tmp/install_python3.8
-    - unless: which python3.8
+    - unless: 
+      - which python3.8
+      - python3.8 -m pandas
     - require:
       - install_python38_requirements
 
