@@ -33,9 +33,7 @@ configure_python38:
         make
         make altinstall
         rm -Rf /tmp/install_python3.8
-    - unless: 
-      - which python3.8
-      - python3.8 -m pandas
+    - unless: which python3.8
     - require:
       - install_python38_requirements
 
