@@ -1,3 +1,19 @@
+install_python38_requirements:
+  pkg.installed:
+    - pkgs:
+      - ssh-askpass-gnome 
+      - ssh-askpass
+
+vscode_zshrc:
+  file.blockreplace:
+    - name: /home/{{ username }}/.zshrc
+    - marker_start: "# begin of visual studio code -DO-NOT-EDIT-"
+    - marker_end: "# end of visual studio code"
+    - append_if_not_found: True
+    - content: |
+    - show_changes: True
+        export SSH_ASKPASS=/usr/bin/ssh-askpass
+
 vscode:
   cmd.run:
     - name: |
