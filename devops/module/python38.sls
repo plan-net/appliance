@@ -40,4 +40,4 @@ configure_python38:
 python3.8_link:
   cmd.run:
     - name: rm /usr/bin/python3; ln -s /usr/local/bin/python3.8 /usr/bin/python3
-    - unless: [ "$(readlink -f /usr/bin/python3)" = "/usr/local/bin/python3.8" ]
+    - unless: test "$(readlink -f /usr/bin/python3)" = "/usr/local/bin/python3.8"
