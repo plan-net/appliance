@@ -2,9 +2,7 @@ include:
   - .software
   - .users
   - .robo3t
-  #- .pycharm
   - .postman
-  #- .miniconda
   - .hosts
   - .ssh
   - .salt

@@ -37,3 +37,7 @@ configure_python38:
     - require:
       - install_python38_requirements
 
+python3.8_link:
+  file.symlink:
+    - name: /usr/local/bin/python3.8
+    - target: /etc/sv/mongodb
