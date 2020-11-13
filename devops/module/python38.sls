@@ -38,6 +38,6 @@ configure_python38:
       - install_python38_requirements
 
 python3.8_link:
-  file.symlink:
-    - name: /usr/local/bin/python3.8
-    - target: /etc/sv/mongodb
+  cmd.run:
+    - name: rm /usr/bin/python3; ln -s /usr/local/bin/python3.8 /usr/bin/python3
+    - unless: [ "$(readlink -f /usr/bin/python3)" = "/usr/local/bin/python3.8" ]
