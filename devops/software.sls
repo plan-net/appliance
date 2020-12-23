@@ -24,7 +24,7 @@ system_prerequisites:
       #- python-dev
       - build-essential
       - libappindicator3-1
-      #- meld
+      - meld
       - python-tk
       - libcanberra-gtk-module
       #- chromium

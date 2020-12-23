@@ -1,35 +1,24 @@
 #!/usr/bin/python3
 
-from subprocess import check_output, check_call, STDOUT
-from os.path import expanduser, abspath, join, exists
-from os import chdir, system, unlink, makedirs, getlogin
-import sys
 import datetime
+import sys
+from glob import glob
+from os import chdir, system, unlink, makedirs, getlogin
+from os.path import expanduser, abspath, join, exists, basename
+from subprocess import check_output, check_call, STDOUT
 
 home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
 worktree = join(pnbi, "appliance")
 UPDATE_FILE = join(pnbi, ".upgrade")
+INSTALLED_MODULES = join(pnbi, "installed-modules/*")
+
 username = getlogin()
 
 
 def do_update():
     open(UPDATE_FILE, "w").write("")
 
-
-if not exists(pnbi):
-    makedirs(pnbi)
-    chdir(pnbi)
-    check_call(["/usr/bin/git", "clone",
-                "https://github.com/plan-net/appliance.git"])
-    do_update()
-if not exists("/usr/bin/salt-call"):
-    chdir(pnbi)
-    check_call(["/usr/bin/wget", "https://bootstrap.saltstack.com",
-                "-O", "bootstrap-salt.sh"])
-    check_call(["/usr/bin/sudo", "/bin/sh", "bootstrap-salt.sh", "-X",
-                "stable"])
-    do_update()
 
 chdir(worktree)
 try:
@@ -79,12 +68,19 @@ if exists(UPDATE_FILE):
     chdir(worktree)
     check_call(["git", "pull"])
     print("run upgrade")
+    cmd = "sudo truncate --size 0 {home}/salt_call.log".format(home=home)
+    system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
-    cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
-          "--state-output=changes state.apply setup 2>&1 " \
-          "| tee {home}/salt_call.log".format(worktree=worktree, home=home)
-    system(cmd)
+    module = ["setup"]
+    module += ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
+    for mod in module:
+        print("\n***", mod, "\n")
+        cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
+              "--state-output=changes state.apply {module} 2>&1 " \
+              "| tee -a {home}/salt_call.log".format(
+            worktree=worktree, home=home, module=mod)
+        system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
     if exists(UPDATE_FILE):

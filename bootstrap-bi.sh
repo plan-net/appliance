@@ -81,7 +81,6 @@ fi
 
 if [ ! -d appliance ]; then
     git clone https://github.com/plan-net/appliance.git
-    chown -R $USER:$USER appliance
 else
     cd appliance
     git pull
@@ -95,6 +94,7 @@ test -f $USERHOME/.pnbi_salt/.update && rm $USERHOME/.pnbi_salt/.update
 salt-call --file-root $USERHOME/.pnbi_salt/appliance/devops -l info --local --state-output=changes state.apply setup 2>&1 | tee $USERHOME/salt_call.log
 chown $USER:$USER $USERHOME/salt_call.log
 chmod 777 $USERHOME/salt_call.log
+chown -R $USER:$USER "$USERHOME/.pnbi_salt"
 
 echo
 echo "system requires reboot"

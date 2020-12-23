@@ -9,16 +9,23 @@ The appliance ships with the following features:
 
 * various utilities, i.e. git, curl, wget, mc, htop, gcc, tmux, screen, yarn
 * zsh extended Bourne shell, including the Powerlevel9k theme for zsh
-* Pycharm, the Python Integrated Development Environment
 * a local MongoDB server instance
-* Robo3T and MongoDB Compass client
+* Robo3T
 * Postman, the API development environment
-* Miniconda3, the lightweight installation of Anaconda Data Science Platform
 * Chromium, the Open-Source browser, Gimp, the GNU Image
   Manipulation Program, Meld, the graphical diff tool
 * hostnames of Plan.Net BI clusters at AWS and SP, including ssh tweaks
 * various Desktop tweaks to make your life easier
 * preinstalled core3 and core4os sources
+
+Optional modules are available and can be installed:
+* chrome
+* pycharm
+* python38
+* R
+* vscode
+
+Install these with for example ``bi-installer R``.
 
 
 Install Virtualbox
@@ -114,6 +121,7 @@ ADDITIONAL NOTES
   working with this branch. You will have to switch back to master manually
   by running the `bootstrap-bi.sh` script again or by checking out to master
   manually in `git -C ~/.pnbi_salt/appliance checkout master`.
+  
 * It is safe to run `~/.pnbi_salt/appliance/bootstrap-bi.sh` or 
   `~/.pnbi_salt/appliance/update-bi.py`
   manually and at any time.

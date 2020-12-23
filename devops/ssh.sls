@@ -3,6 +3,8 @@
 create_ssh_config:
   file.managed:
     - name: /home/{{ username }}/.ssh/config
+    - unless:
+      - ls /home/{{ username }}/.ssh/config
     - contents: |
         # default empty devops file
 
@@ -46,5 +48,11 @@ cleanup_ssh_config_2:
             ProxyCommand ssh -W %h:%p 35.158.149.95
 
         Host *.stage
+            ProxyCommand ssh -W %h:%p salt.spm
+
+        Host *.staging
+            ProxyCommand ssh -W %h:%p salt.spm
+
+        Host !salt.spm *.spm
             ProxyCommand ssh -W %h:%p salt.spm
     - show_changes: True
