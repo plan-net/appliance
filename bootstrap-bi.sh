@@ -15,7 +15,7 @@ G='\u001b[38;5;22m'
 NC='\033[0m' # No Color
 
 if [[ $# -eq 0 ]] ; then
-    BRANCH="master"
+    BRANCH="master2"
 else
     BRANCH="$1"
 fi
