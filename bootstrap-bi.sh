@@ -40,16 +40,13 @@ It features:
 
     * various ${HL}utilities${NC}, i.e. git, curl, wget, mc, htop, gcc, tmux, screen, yarn
     * ${HL}zsh${NC} extended Bourne shell, including the ${HL}Powerlevel9k${NC} theme for zsh
-    * ${HL}Pycharm${NC}, the Python Integrated Development Environment
     * a local ${HL}MongoDB server${NC} instance
     * ${HL}Robo3T${NC} and MongoDB ${HL}Compass${NC} client
     * ${HL}Postman${NC}, the API development environment
-    * Miniconda3, the lightweight installation of ${HL}Anaconda${NC} Data Science Platform
-    * ${HL}Chromium${NC}, the Open-Source browser, ${HL}Gimp${NC}, the GNU Image
-      Manipulation Program, ${HL}Meld${NC}, the graphical diff tool
     * hostnames of Plan.Net BI ${HL}clusters at AWS and SP${NC}, including ssh tweaks
     * various ${HL}Desktop tweaks${NC} to make your life easier
     * preinstalled ${HL}core3 and core4os${NC} sources
+    * additional optional modules for Pycharm, Chrome, Visual Code, R and Python 3.8
 
 Installation will take several minutes.
 So, grab a cup of coffee while you go!
