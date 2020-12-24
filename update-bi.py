@@ -33,7 +33,7 @@ if out != "" or exists(UPDATE_FILE):
     print("get upgrade")
     branch = check_output([
         "git", "rev-parse", "--symbolic-full-name", "--abbrev-ref", 
-        "HEAD"]).strip()
+        "HEAD"]).decode("utf-8").strip()
     out = check_output([
         "git", "--no-pager", "log",
         "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
