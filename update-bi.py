@@ -31,6 +31,10 @@ except:
 if out != "" or exists(UPDATE_FILE):
     do_update()
     print("get upgrade")
+    out = check_output([
+        "git", "--no-pager", "log",
+        "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
+        "master2..origin/master2"]).decode("utf-8").strip()
     check_call(["git", "fetch"])
     print()
     print("==============================")
@@ -43,10 +47,6 @@ if out != "" or exists(UPDATE_FILE):
     print("      your workstation regularly and in time. Upgrades include")
     print("      important security patches as well as productivity tools.")
     print()
-    out = check_output([
-        "git", "--no-pager", "log",
-        "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
-        "master2..origin/master2"]).decode("utf-8").strip()
     if out:
         print("CHANGES:")
         print()
