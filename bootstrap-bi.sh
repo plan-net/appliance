@@ -22,31 +22,36 @@ fi
 
 clear
 printf "${G}
- ▄▄▄·▄▄▌   ▄▄▄·  ▐ ▄     ▐ ▄ ▄▄▄ .▄▄▄▄▄    ▄▄▄▄· ▪
-▐█ ▄███•  ▐█ ▀█ •█▌▐█   •█▌▐█▀▄.▀·•██      ▐█ ▀█▪██
- ██▀·██▪  ▄█▀▀█ ▐█▐▐▌   ▐█▐▐▌▐▀▀▪▄ ▐█.▪    ▐█▀▀█▄▐█·
-▐█▪·•▐█▌▐▌▐█ ▪▐▌██▐█▌   ██▐█▌▐█▄▄▌ ▐█▌·    ██▄▪▐█▐█▌
-.▀   .▀▀▀  ▀  ▀ ▀▀ █▪ ▀ ▀▀ █▪ ▀▀▀  ▀▀▀     ·▀▀▀▀ ▀▀▀
- ▄▄▄·  ▄▄▄· ▄▄▄·▄▄▌  ▪   ▄▄▄·  ▐ ▄  ▄▄· ▄▄▄ .
-▐█ ▀█ ▐█ ▄█▐█ ▄███•  ██ ▐█ ▀█ •█▌▐█▐█ ▌▪▀▄.▀·
-▄█▀▀█  ██▀· ██▀·██▪  ▐█·▄█▀▀█ ▐█▐▐▌██ ▄▄▐▀▀▪▄
-▐█ ▪▐▌▐█▪·•▐█▪·•▐█▌▐▌▐█▌▐█ ▪▐▌██▐█▌▐███▌▐█▄▄▌
- ▀  ▀ .▀   .▀   .▀▀▀ ▀▀▀ ▀  ▀ ▀▀ █▪·▀▀▀  ▀▀▀
-VERSION 1.2${NC}
+    ____  _   ______  ____                   
+   / __ \/ | / / __ )/  _/                   
+  / /_/ /  |/ / __  |/ /                     
+ / ____/ /|  / /_/ // /                      
+/_/   /_/ |_/_____/___/_                     
+  ____ _____  ____  / (_)___ _____  ________ 
+ / __ `/ __ \/ __ \/ / / __ `/ __ \/ ___/ _ \
+/ /_/ / /_/ / /_/ / / / /_/ / / / / /__/  __/
+\__,_/ .___/ .___/_/_/\__,_/_/ /_/\___/\___/ 
+    /_/   /_/                                
+
+VERSION 2.0${NC}
 
 This script will setup your Debian virtualbox (appliance branch $BRANCH)
 
 It features:
 
-    * various ${HL}utilities${NC}, i.e. git, curl, wget, mc, htop, gcc, tmux, screen, yarn
-    * ${HL}zsh${NC} extended Bourne shell, including the ${HL}Powerlevel9k${NC} theme for zsh
+    * various ${HL}utilities${NC}, i.e. git, curl, wget, mc, htop, gcc, 
+      tmux, screen, yarn
+    * ${HL}zsh${NC} extended Bourne shell, including the 
+      ${HL}Powerlevel9k${NC} theme for zsh
     * a local ${HL}MongoDB server${NC} instance
     * ${HL}Robo3T${NC} and MongoDB ${HL}Compass${NC} client
     * ${HL}Postman${NC}, the API development environment
-    * hostnames of Plan.Net BI ${HL}clusters at AWS and SP${NC}, including ssh tweaks
+    * hostnames of Plan.Net BI ${HL}clusters at AWS and SP${NC}, including 
+      ssh tweaks
     * various ${HL}Desktop tweaks${NC} to make your life easier
     * preinstalled ${HL}core3 and core4os${NC} sources
-    * additional optional modules for Pycharm, Chrome, Visual Code, R and Python 3.8
+    * additional optional modules for Pycharm, Chrome, Visual Code, R and 
+      Python 3.8
 
 Installation will take several minutes.
 So, grab a cup of coffee while you go!
