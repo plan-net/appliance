@@ -95,6 +95,9 @@ if exists(UPDATE_FILE):
                 if int(line.split()[1]) > 0:
                     error = True
     print()
+    cmd = "sudo chown -R {username}:{username} {pnbi}".format(
+        username=username, pnbi=pnbi)
+    system(cmd)
     print("RUNTIME:", datetime.datetime.now() - t0)
     if error:
         print()
