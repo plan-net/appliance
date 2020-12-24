@@ -81,7 +81,8 @@ if exists(UPDATE_FILE):
     module = ["setup"]
     module += ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
     for mod in module:
-        print("\n", "*" * 80)
+        print()
+        print("*" * 80)
         print("***", mod)
         print("*" * 80, "\n")
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
