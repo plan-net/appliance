@@ -34,12 +34,6 @@ if out != "" or exists(UPDATE_FILE):
     branch = check_output([
         "git", "rev-parse", "--symbolic-full-name", "--abbrev-ref", 
         "HEAD"]).decode("utf-8").strip()
-    out = check_output([
-        "git", "--no-pager", "log",
-        "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
-        "{branch}..origin/{branch}".format(branch=branch)]).decode(
-            "utf-8").strip()
-    print(">>>", out)
     check_call(["git", "fetch"])
     print()
     print("==============================")
@@ -52,6 +46,12 @@ if out != "" or exists(UPDATE_FILE):
     print("      your workstation regularly and in time. Upgrades include")
     print("      important security patches as well as productivity tools.")
     print()
+    out = check_output([
+        "git", "--no-pager", "log",
+        "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
+        "{branch}..origin/{branch}".format(branch=branch)]).decode(
+            "utf-8").strip()
+    print(">>>", out)
     if out:
         print("CHANGES:")
         print()
