@@ -51,7 +51,6 @@ if out != "" or exists(UPDATE_FILE):
         "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
         "{branch}..origin/{branch}".format(branch=branch)]).decode(
             "utf-8").strip()
-    print(">>>", out)
     if out:
         print("CHANGES:")
         print()
