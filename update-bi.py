@@ -40,7 +40,7 @@ if out != "" or exists(UPDATE_FILE):
     print("Plan.Net Business Intelligence")
     print("==============================")
     print()
-    print("=> your devops station requires upgrades !\n")
+    print("=> your devops station requires upgrades !")
     print()
     print("NOTE: as a core user it is your responsibility to upgrade")
     print("      your workstation regularly and in time. Upgrades include")
