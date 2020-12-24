@@ -14,6 +14,7 @@ AVAILABLE="$ROOT/module"
 MODULE="$AVAILABLE/$*.sls"
 STATE="module/$*"
 FLAG="$SALT/installed-modules/$*"
+INSTALLED="$SALT/installed-modules"
 
 if [ -f $FLAG ]; then
   echo "$*: already installed"
@@ -21,7 +22,7 @@ fi
 
 if [ ! -f $MODULE ]; then
   echo "available modules:"
-  ls "$AVAILABLE" | grep -E ".+\.sls$" | xargs -I {} basename {} .sls | sort 
+  ls "$AVAILABLE" | grep -E ".+\.sls$" | xargs -I {} basename {} .sls | xargs -I {} sh -c "test -f $INSTALLED/{} && echo '+ {}' || echo '- {}'"
   exit
 fi
 
