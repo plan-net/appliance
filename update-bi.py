@@ -31,10 +31,14 @@ except:
 if out != "" or exists(UPDATE_FILE):
     do_update()
     print("get upgrade")
+    branch = check_output([
+        "git", "rev-parse", "--symbolic-full-name", "--abbrev-ref", 
+        "HEAD"]).strip()
     out = check_output([
         "git", "--no-pager", "log",
         "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
-        "master2..origin/master2"]).decode("utf-8").strip()
+        "{branch}..origin/{branch}".format(branch=branch)]).decode(
+            "utf-8").strip()
     check_call(["git", "fetch"])
     print()
     print("==============================")
@@ -66,6 +70,7 @@ if out != "" or exists(UPDATE_FILE):
 if exists(UPDATE_FILE):
     t0 = datetime.datetime.now()
     chdir(worktree)
+    check_call(["git", "reset", "--hard", "origin/" + branch])
     check_call(["git", "pull"])
     print("run upgrade")
     cmd = "sudo truncate --size 0 {home}/salt_call.log".format(home=home)
