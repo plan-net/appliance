@@ -46,7 +46,7 @@ if out != "" or exists(UPDATE_FILE):
     out = check_output([
         "git", "--no-pager", "log",
         "--pretty=format:%s %Cgreen(%cr)%Creset by %C(bold blue)%an%Creset",
-        "master..origin/master"]).decode("utf-8").strip()
+        "master2..origin/master2"]).decode("utf-8").strip()
     if out:
         print("CHANGES:")
         print()
