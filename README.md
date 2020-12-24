@@ -1,127 +1,149 @@
 SETUP APPLIANCE WITH VIRTUALBOX
 ===============================
 
-This guide describes the setup of Oracle VirtualBox and the installation of the
-Plan.Net Business Intelligence appliance on Debian 9 (Stretch). Please note that
-only Debian 9 is supported at the moment.
+This guide describes the setup of the core4os development environment as known
+as the appliance. This appliance is a Debian 9 Linux hosted in an Oracle 
+VirtualBox. Operating system, software installation, configuration and upgrades 
+of the development environment are supported with a bootstrap procedure.
+
+APPLIANCE FEATURES
+------------------
 
 The appliance ships with the following features:
 
 * various utilities, i.e. git, curl, wget, mc, htop, gcc, tmux, screen, yarn
-* zsh extended Bourne shell, including the Powerlevel9k theme for zsh
+* frontend development tools, i.e. nodejs and yarn
 * a local MongoDB server instance
-* Robo3T
+* Robo3T and MongoDB Compass client
 * Postman, the API development environment
-* Chromium, the Open-Source browser, Gimp, the GNU Image
-  Manipulation Program, Meld, the graphical diff tool
-* hostnames of Plan.Net BI clusters at AWS and SP, including ssh tweaks
+* preconfigured hostnames of Plan.Net BI clusters at AWS and SP, including ssh tweaks
 * various Desktop tweaks to make your life easier
 * preinstalled core3 and core4os sources
+* zsh extended Bourne shell, including the Powerlevel9k theme for zsh
 
-Optional modules are available and can be installed:
-* chrome
-* pycharm
-* python38
+On top of the standard setup the appliance ships with optional modules
+
+* Pycharm, the Python Integrated Development Environment
+* Chrome browser
+* Python 3.8
 * R
-* vscode
+* Visual Code
 
-Install these with for example ``bi-installer R``.
+VIRTUALBOX INSTALLATION AND PREPARATION
+---------------------------------------
 
-
-Install Virtualbox
-------------------
-
-### Windows and Mac Installation
+### WINDOWS AND MAC
 
 Download and install the latest version from
 https://www.virtualbox.org/wiki/Downloads.
 
-### Linux Installation
+### LINUX
 
-There are various step-by-step guides available in the web. See for example 
-https://tecadmin.net/install-virtualbox-debian-9-stretch/.
+There are various step-by-step guides available in the web. See for exampleh
+ttps://tecadmin.net/install-virtualbox-debian-9-stretch/.
 
 #### prerequisites
 
-    sudo apt-get update
-    sudo apt-get upgrade
+  sudo apt-get update
+  sudo apt-get upgrade
 
 #### add software repository
 
-    echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+  echo "deb <http://download.virtualbox.org/virtualbox/debian> stretch contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 
 #### import sign key
 
-    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+  wget -q <https://www.virtualbox.org/download/oracle_vbox_2016.asc> -O- | sudo apt-key add -
+  wget -q <https://www.virtualbox.org/download/oracle_vbox.asc> -O- | sudo apt-key add -
 
 #### install and launch
 
-    sudo apt-get update
-    sudo apt-get install virtualbox-6.0
+  sudo apt-get update
+  sudo apt-get install virtualbox-6.0
 
-
-Create a Virtual Machine
+CREATE A VIRTUAL MACHINE
 ------------------------
 
-Launch virtualbox with the following settings:
+Create a new virtual machine with the following settings:
 
+* Linux
 * 4gB RAM or more
-* virtual hard disk with *fixed size*, e.g. 64gB or more
+* virtual hard disk with fixed size, e.g. 64gB or more
 
-
-Install Debian 9
-----------------
+### INSTALL DEBIAN 9
 
 Download Debian 9 ISO image from 
 https://www.debian.org/releases/stretch/debian-installer/index.de.html
 
-Start the virtual machine and select the downloaded image for installation.
+Start the virtual machine and select the downloaded image for installation. 
+During installation select 
 
-**REMEMBER YOUR PASSWORDS!** You need to remember the administration and your
+* Guided Partition and use the entire disk.
+* Debian Desktop Environment with
+  * GNOME
+* Standard System Utilities
+
+Choose all default settings unless you know what you are doing. Select 
+/dav/sda or similar for the GRUB loader.
+
+REMEMBER YOUR PASSWORDS! You need to remember the administration and your 
 personal password. If you do not remember, then you will have to setup a fresh
 appliance. We cannot recover any lost or forgotten passwords!
 
-
-Install Guest Additions
------------------------
+### INSTALL GUEST ADDITIONS
 
 Start the Debian 9 virtual machine, launch a terminal and run the following 
 commands:
 
-    su -
-    apt update
-    apt upgrade
-    apt install build-essential module-assistant dkms
-    m-a prepare
-    sh /media/cdrom/VBoxLinuxAdditions.run
-    reboot
+  su -
+  apt update
+  apt upgrade
+  apt install build-essential module-assistant dkms
+  m-a prepare
 
-Setup the display in Debian to suite your needs.
+Select Devices and Insert Guest Additions CD image. Then continue in your 
+terminal with 
 
+  sh /media/cdrom/VBoxLinuxAdditions.run
+  reboot
 
-Install Plan.Net BI appliance
------------------------------
+Setup the display in Debian to suite your needs. Create a permanent, 
+auto-mounted shared folder to your host operating system.
+
+INSTALL THE APPLIANCE
+---------------------
 
 Open a terminal and run the following commands
 
-    wget https://raw.githubusercontent.com/plan-net/appliance/master/bootstrap-bi.sh
-    bash bootstrap-bi.sh
+  wget https://raw.githubusercontent.com/plan-net/appliance/master/bootstrap-bi.sh
+  bash bootstrap-bi.sh
 
+### ADDITIONAL APPLIANCE MODULES
+
+Software and configuration states are packaged in appliance modules. List 
+available appliance modules with
+
+  bi-installer
+
+Install a module of your choice with for example
+
+  bi-installer chrome
+  bi-installer vscode
+  bi-installer python38
+  # etc.
 
 ADDITIONAL NOTES
-================
+----------------
 
-* The Plan.Net BI appliance ships with an automated update. You can enforce the
-  update with `touch ~/.pnbi_salt/.upgrade`.
+The Plan.Net BI appliance ships with an automated update. You can enforce 
+the update with touch ```~/.pnbi_salt/.upgrade```.
 
-* For testing purposes you can pass a branch to `bootstrap-bi.sh`. The default
-  branch is *master*. To switch for example to develop, run 
-  `bash bootstrap-bi.sh develop`. **Please note**, that automatic updates are
-  working with this branch. You will have to switch back to master manually
-  by running the `bootstrap-bi.sh` script again or by checking out to master
-  manually in `git -C ~/.pnbi_salt/appliance checkout master`.
-  
-* It is safe to run `~/.pnbi_salt/appliance/bootstrap-bi.sh` or 
-  `~/.pnbi_salt/appliance/update-bi.py`
-  manually and at any time.
+For testing purposes you can pass a branch to ```bootstrap-bi.sh```. The 
+default branch is _master2_. To switch for example to develop, run
+```bash bootstrap-bi.sh develop```. Please note, that automatic updates 
+are working with this branch. You will have to switch back to master manually
+by running the ```bootstrap-bi.sh``` script again or by checking out to master
+manually in  ```git -C ~/.pnbi_salt/appliance checkout master```.
+
+It is safe to run ```~/.pnbi_salt/appliance/update-bi.py``` manually and at any 
+time.
