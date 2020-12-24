@@ -81,7 +81,9 @@ if exists(UPDATE_FILE):
     module = ["setup"]
     module += ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
     for mod in module:
-        print("\n***", mod, "\n")
+        print("\n", "*" * 80)
+        print("***", mod)
+        print("*" * 80, "\n")
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
               "--state-output=changes state.apply {module} 2>&1 " \
               "| tee -a {home}/salt_call.log".format(
