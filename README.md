@@ -39,27 +39,27 @@ https://www.virtualbox.org/wiki/Downloads.
 
 ### LINUX
 
-There are various step-by-step guides available in the web. See for exampleh
-ttps://tecadmin.net/install-virtualbox-debian-9-stretch/.
+There are various step-by-step guides available in the web. See for example
+https://tecadmin.net/install-virtualbox-debian-9-stretch/.
 
 #### prerequisites
 
-  sudo apt-get update
-  sudo apt-get upgrade
+    sudo apt-get update
+    sudo apt-get upgrade
 
 #### add software repository
 
-  echo "deb <http://download.virtualbox.org/virtualbox/debian> stretch contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+    echo "deb <http://download.virtualbox.org/virtualbox/debian> stretch contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 
 #### import sign key
 
-  wget -q <https://www.virtualbox.org/download/oracle_vbox_2016.asc> -O- | sudo apt-key add -
-  wget -q <https://www.virtualbox.org/download/oracle_vbox.asc> -O- | sudo apt-key add -
+    wget -q <https://www.virtualbox.org/download/oracle_vbox_2016.asc> -O- | sudo apt-key add -
+    wget -q <https://www.virtualbox.org/download/oracle_vbox.asc> -O- | sudo apt-key add -
 
 #### install and launch
 
-  sudo apt-get update
-  sudo apt-get install virtualbox-6.0
+    sudo apt-get update
+    sudo apt-get install virtualbox-6.0
 
 CREATE A VIRTUAL MACHINE
 ------------------------
@@ -67,8 +67,8 @@ CREATE A VIRTUAL MACHINE
 Create a new virtual machine with the following settings:
 
 * Linux
-* 4gB RAM or more
-* virtual hard disk with fixed size, e.g. 64gB or more
+* 4 GB RAM or more
+* virtual hard disk with fixed size, e.g. 64 GB or more
 
 ### INSTALL DEBIAN 9
 
@@ -76,17 +76,19 @@ Download Debian 9 ISO image from
 https://www.debian.org/releases/stretch/debian-installer/index.de.html
 
 Start the virtual machine and select the downloaded image for installation. 
-During installation select 
+During installation select the following when prompted
 
-* Guided Partition and use the entire disk.
-* Debian Desktop Environment with
-  * GNOME
-* Standard System Utilities
+* Partitioning method: Guided - use the entire disk
+* Partitioning scheme: All files in one partition
+* Write changes to disk: Yes
+* Scan another CD or DVD: No
+* HTTP proxy information: (leave this blank)
+* Software to install: 'Debian desktop environment', 'GNOME' and 'standard system utilities'
+* Device for boot loader installation: /dev/sda or similar
 
-Choose all default settings unless you know what you are doing. Select 
-/dav/sda or similar for the GRUB loader.
+As a general rule, choose all default settings unless you know what you are doing.
 
-REMEMBER YOUR PASSWORDS! You need to remember the administration and your 
+**REMEMBER YOUR PASSWORDS!** You need to remember the administration and your 
 personal password. If you do not remember, then you will have to setup a fresh
 appliance. We cannot recover any lost or forgotten passwords!
 
@@ -95,17 +97,17 @@ appliance. We cannot recover any lost or forgotten passwords!
 Start the Debian 9 virtual machine, launch a terminal and run the following 
 commands:
 
-  su -
-  apt update
-  apt upgrade
-  apt install build-essential module-assistant dkms
-  m-a prepare
+    su -
+    apt update
+    apt upgrade
+    apt install build-essential module-assistant dkms
+    m-a prepare
 
-Select Devices and Insert Guest Additions CD image. Then continue in your 
-terminal with 
+In the "Devices" menu in VirtualBox, select "Insert Guest Additions CD image."
+Then continue on the terminal:
 
-  sh /media/cdrom/VBoxLinuxAdditions.run
-  reboot
+    sh /media/cdrom/VBoxLinuxAdditions.run
+    reboot
 
 Setup the display in Debian to suite your needs. Create a permanent, 
 auto-mounted shared folder to your host operating system.
@@ -113,24 +115,31 @@ auto-mounted shared folder to your host operating system.
 INSTALL THE APPLIANCE
 ---------------------
 
+In Debian VMs, it is possible that your user might not be added to the sudo group.
+In such a case, follow the following commands (replace 'username' with your username):
+
+    su -
+    adduser username sudo
+    reboot
+
 Open a terminal and run the following commands
 
-  wget https://raw.githubusercontent.com/plan-net/appliance/master/bootstrap-bi.sh
-  bash bootstrap-bi.sh
+    wget https://raw.githubusercontent.com/plan-net/appliance/master/bootstrap-bi.sh
+    bash bootstrap-bi.sh
 
 ### ADDITIONAL APPLIANCE MODULES
 
 Software and configuration states are packaged in appliance modules. List 
 available appliance modules with
 
-  bi-installer
+    bi-installer
 
 Install a module of your choice with for example
 
-  bi-installer chrome
-  bi-installer vscode
-  bi-installer python38
-  # etc.
+    bi-installer chrome
+    bi-installer vscode
+    bi-installer python38
+    # etc.
 
 ADDITIONAL NOTES
 ----------------
