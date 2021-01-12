@@ -44,22 +44,20 @@ https://tecadmin.net/install-virtualbox-debian-9-stretch/.
 
 #### prerequisites
 
-    sudo apt-get update
-    sudo apt-get upgrade
+    su -s
+    apt-get update
+    apt-get upgrade
 
-#### add software repository
+    # add software repository
+    echo "deb <http://download.virtualbox.org/virtualbox/debian> stretch contrib" | tee /etc/apt/sources.list.d/virtualbox.list
 
-    echo "deb <http://download.virtualbox.org/virtualbox/debian> stretch contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+    # import sign key
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
 
-#### import sign key
-
-    wget -q <https://www.virtualbox.org/download/oracle_vbox_2016.asc> -O- | sudo apt-key add -
-    wget -q <https://www.virtualbox.org/download/oracle_vbox.asc> -O- | sudo apt-key add -
-
-#### install and launch
-
-    sudo apt-get update
-    sudo apt-get install virtualbox-6.0
+    # install and launch
+    apt-get update
+    apt-get install virtualbox-6.0
 
 CREATE A VIRTUAL MACHINE
 ------------------------
@@ -115,16 +113,13 @@ auto-mounted shared folder to your host operating system.
 INSTALL THE APPLIANCE
 ---------------------
 
-In Debian VMs, it is possible that your user might not be added to the sudo group.
-In such a case, follow the following commands (replace 'username' with your username):
+Open a terminal, switch to root user
 
     su -
-    adduser username sudo
-    reboot
 
-Open a terminal and run the following commands
+and run the following commands
 
-    wget https://raw.githubusercontent.com/plan-net/appliance/master/bootstrap-bi.sh
+    wget https://raw.githubusercontent.com/plan-net/appliance/master2/bootstrap-bi.sh
     bash bootstrap-bi.sh
 
 ### ADDITIONAL APPLIANCE MODULES
