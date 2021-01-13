@@ -21,7 +21,7 @@ else
 fi
 USERHOME="/home/$USER"
 
-if [[ $# -eq 1 ]] ; then
+if [[ $# -eq 0 ]] ; then
     BRANCH="master2"
 else
     BRANCH="$1"
