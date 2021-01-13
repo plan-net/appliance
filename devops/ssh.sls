@@ -2,7 +2,7 @@
 
 create_ssh_config:
   file.managed:
-    - name: /home/{{ username }}/.ssh/config
+    - xname: /home/{{ username }}/.ssh/config
     - unless:
       - ls /home/{{ username }}/.ssh/config
     - contents: |
