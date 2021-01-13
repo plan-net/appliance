@@ -111,4 +111,5 @@ if exists(UPDATE_FILE):
         print()
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
         print("!!! PLEASE CONTACT bi-ops@plan-net.com")
+        print("!!! AND ATTACH FILE {home}/salt_call.log".format(home=home))
         print()
