@@ -1,16 +1,15 @@
-{% set VERSION = "x64-7.36.1" %}
-
-postman_version:
-  cmd.run:
-    - name: |
-        curl --quiet -I -X GET https://dl.pstmn.io/download/latest/linuxx64 > /tmp/postman.version 2>/dev/null
-        cat /tmp/postman.version | grep "application/gzip" || exit 0
-        cat /tmp/postman.version | grep "{{ VERSION }}.tar.gz" && exit 0
-        cd /tmp
-        curl -X GET https://dl.pstmn.io/download/latest/linuxx64 > Postman-linux-{{ VERSION }}.tar.gz
-        tar -xvf Postman-linux-{{ VERSION }}.tar.gz
-        rm -Rf /opt/Postman
-        mv Postman /opt/
+postman_archive:
+  archive:
+    - if_missing: /opt/Postman
+    - extracted
+    - name: /opt/
+    - source: https://dl.pstmn.io/download/latest/linux64
+    - source_hash: md5=125c25bcb1bb3a45c19e3513d6190946
+    - archive_format: tar
+    - tar_options: z
+    - keep: true
+    - user: root
+    - group: root
 
 /usr/local/bin/postman:
   file.symlink:
