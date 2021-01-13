@@ -9,7 +9,7 @@ if (( $EUID != 0 )); then
     exit
 fi
 
-if [[ "$AUTO -ne 1" ]]; then
+if [[ $AUTO -ne 1 ]]; then
     echo "you must not start this script as root"
     exit
 fi
