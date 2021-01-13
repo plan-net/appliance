@@ -1,7 +1,7 @@
 {% set VERSION = "x64-7.36.1" %}
 
 postman_version:
-  cmd.run:
+  cmd.run: |
     curl --quiet -I -X GET https://dl.pstmn.io/download/latest/linuxx64 > /tmp/postman.version 2>/dev/null
     cat /tmp/postman.version | grep "application/gzip" || exit 0
     cat /tmp/postman.version | grep "{{ VERSION }}.tar.gz" && exit 0
