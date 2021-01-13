@@ -34,8 +34,8 @@ if out != "" or exists(UPDATE_FILE):
     print("get upgrade")
     branch = check_output([
         "git", "rev-parse", "--symbolic-full-name", "--abbrev-ref", 
-        "HEAD"], STDERR=DEVNULL).decode("utf-8").strip()
-    check_call(["git", "fetch"], STDERR=STDOUT, STDOUT=DEVNULL)
+        "HEAD"], stderr=DEVNULL).decode("utf-8").strip()
+    check_call(["git", "fetch"], stderr=STDOUT, stdout=DEVNULL)
     print()
     title = "PN BI APPLIANCE ({})".format(branch)
     print("=" * len(title))
