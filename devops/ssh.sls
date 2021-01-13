@@ -2,14 +2,14 @@
 
 create_ssh_config:
   file.managed:
-    - xname: /home/{{ username }}/.ssh/config
+    - name: /home/{{ username }}/.ssh/config
     - unless:
       - ls /home/{{ username }}/.ssh/config
     - contents: |
         # default empty devops file
 
 cleanup_ssh_config:
-  file.replace:
+  filexx.replace:
     - name: /home/{{ username }}/.ssh/config
     - pattern: |
         \# START\: CORE4.+?END\: CORE4\-BOOTSTRAP[\s\d\.]+
