@@ -1,4 +1,4 @@
 #!/bin/bash
 
-touch "/home/$SUDO_USER/.pnbi_salt/.upgrade"
-"/home/$SUDO_USER/.pnbi_salt/update-bi.py"
+touch "/home/$USER/.pnbi_salt/.upgrade"
+"/home/$USER/.pnbi_salt/update-bi.py"
