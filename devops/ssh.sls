@@ -9,7 +9,7 @@ create_ssh_config:
         # default empty devops file
 
 cleanup_ssh_config:
-  filexx.replace:
+  file.replace:
     - name: /home/{{ username }}/.ssh/config
     - pattern: |
         \# START\: CORE4.+?END\: CORE4\-BOOTSTRAP[\s\d\.]+
