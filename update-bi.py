@@ -23,7 +23,7 @@ def do_update():
 chdir(worktree)
 try:
     out = check_output([
-        "git", "fetch", "--dry-run"], stderr=STDOUT, stdout=DEVNULL).decode(
+        "git", "fetch", "--dry-run"], stderr=STDOUT).decode(
         "utf-8").strip()
 except:
     print("no connection...\n... cannot check for upgrades!\nskip")
