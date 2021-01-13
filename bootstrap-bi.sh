@@ -1,24 +1,36 @@
 #!/bin/bash
 
-# wget https://raw.githubusercontent.com/plan-net/appliance/master/bootstrap-bi.sh
+# wget https://raw.githubusercontent.com/plan-net/appliance/master2/bootstrap-bi.sh
 # bash bootstrap-bi.sh
 
 if (( $EUID != 0 )); then
-    echo "restarting as sudoer, please enter your password ..."
-    su -c "cd $PWD; /bin/bash $0 $*"
+    echo "restarting as root, please enter your password ..."
+    su -c "export AUTO=1; cd $PWD; /bin/bash $0 $*"
     exit
+fi
+
+if [[ "$AUTO -ne 1" ]]; then
+    echo "you must not start this script as root"
+    exit
+fi
+
+if [ -n "$SUDO_USER" ]; then
+    USER="$SUDO_USER"
+else
+    USER="$USERNAME"
+fi
+USERHOME="/home/$USER"
+
+if [[ $# -eq 1 ]] ; then
+    BRANCH="master2"
+else
+    BRANCH="$1"
 fi
 
 HL='\033[1;32m'
 DG='\033[1;30m'
 G='\u001b[38;5;22m'
 NC='\033[0m' # No Color
-
-if [[ $# -eq 0 ]] ; then
-    BRANCH="master2"
-else
-    BRANCH="$1"
-fi
 
 clear
 printf "${HL}
@@ -33,7 +45,7 @@ printf "${HL}
   \__,_| .__/| .__/|_|_|\__,_|_| |_|\___\___|
        |_|   |_|
 
-VERSION 2.0${NC}
+VERSION 2.0${NC} as $USER in $USERHOME
 
 This script will setup your Debian virtualbox (appliance branch $BRANCH)
 
@@ -59,12 +71,6 @@ So, grab a cup of coffee while you go!
 Press ${HL}<RETURN>${NC} to continue (or CTRL-C to quit) ... "
 read
 echo ""
-if [ -n "$SUDO_USER" ]; then
-    USER="$SUDO_USER"
-else
-    USER="$USERNAME"
-fi
-USERHOME="/home/$USER"
 
 test -d "$USERHOME/.pnbi_salt" || mkdir "$USERHOME/.pnbi_salt"
 chown $USER:$USER "$USERHOME/.pnbi_salt"

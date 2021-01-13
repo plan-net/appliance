@@ -113,11 +113,7 @@ auto-mounted shared folder to your host operating system.
 INSTALL THE APPLIANCE
 ---------------------
 
-Open a terminal, switch to root user
-
-    su -
-
-and run the following commands
+Open a terminal and run the following commands
 
     wget https://raw.githubusercontent.com/plan-net/appliance/master2/bootstrap-bi.sh
     bash bootstrap-bi.sh
