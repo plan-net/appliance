@@ -5,7 +5,7 @@ import sys
 from glob import glob
 from os import chdir, system, unlink, makedirs, getlogin
 from os.path import expanduser, abspath, join, exists, basename
-from subprocess import check_output, check_call, STDOUT
+from subprocess import check_output, check_call, STDOUT, DEVNULL
 
 home = abspath(expanduser("~"))
 pnbi = join(home, ".pnbi_salt")
@@ -23,7 +23,8 @@ def do_update():
 chdir(worktree)
 try:
     out = check_output([
-        "git", "fetch", "--dry-run"], stderr=STDOUT).decode("utf-8").strip()
+        "git", "fetch", "--dry-run"], stderr=STDOUT, stdout=DEVNULL).decode(
+        "utf-8").strip()
 except:
     print("no connection...\n... cannot check for upgrades!\nskip")
     sys.exit()
@@ -87,7 +88,7 @@ if exists(UPDATE_FILE):
         print("*" * 80, "\n")
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
               "--state-output=changes state.apply {module} 2>&1 " \
-              "| tee -a {home}/salt_call.log".format(
+              "| tee -a {home}/salt_call.log >/dev/null 2>&1".format(
             worktree=worktree, home=home, module=mod)
         system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
@@ -100,7 +101,7 @@ if exists(UPDATE_FILE):
         if line.lower().startswith("summary for local"):
             out = True
         if out:
-            if line.lower().startswith("failed"):
+            if line.lower().startswith("failed:"):
                 if int(line.split()[1]) > 0:
                     error = True
     print()
@@ -111,5 +112,6 @@ if exists(UPDATE_FILE):
     if error:
         print()
         print("!!! THERE HAVE BEEN FAILURES WITH YOUR UPGRADE")
+        print("!!! SEE {home}".format(home=home))
         print("!!! PLEASE CONTACT bi-ops@plan-net.com")
         print()
