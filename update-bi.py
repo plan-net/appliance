@@ -34,7 +34,7 @@ if out != "" or exists(UPDATE_FILE):
     print("get upgrade")
     branch = check_output([
         "git", "rev-parse", "--symbolic-full-name", "--abbrev-ref", 
-        "HEAD"], stderr=DEVNULL).decode("utf-8").strip()
+        "HEAD"], STDERR=DEVNULL).decode("utf-8").strip()
     check_call(["git", "fetch"], stderr=STDOUT, stdout=DEVNULL)
     print()
     title = "PN BI APPLIANCE ({})".format(branch)
@@ -82,10 +82,13 @@ if exists(UPDATE_FILE):
     module = ["setup"]
     module += ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
     for mod in module:
-        print(mod)
+        print()
+        print("*" * 80)
+        print("***", mod)
+        print("*" * 80, "\n")
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
               "--state-output=changes state.apply {module} 2>&1 " \
-              "| tee -a {home}/salt_call.log".format(
+              "| tee -a {home}/salt_call.log >/dev/null 2>&1".format(
             worktree=worktree, home=home, module=mod)
         system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
@@ -101,11 +104,10 @@ if exists(UPDATE_FILE):
             if line.lower().startswith("failed:"):
                 if int(line.split()[1]) > 0:
                     error = True
+    print()
     cmd = "sudo chown -R {username}:{username} {pnbi}".format(
         username=username, pnbi=pnbi)
     system(cmd)
-    print()
-    print("see {home}/salt_call.log".format(home=home))
     print("RUNTIME:", datetime.datetime.now() - t0)
     if error:
         print()
