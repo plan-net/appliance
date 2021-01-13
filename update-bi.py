@@ -85,7 +85,7 @@ if exists(UPDATE_FILE):
         print(mod)
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
               "--state-output=changes state.apply {module} 2>&1 " \
-              "| tee -a {home}/salt_call.log >/dev/null 2>&1".format(
+              "| tee -a {home}/salt_call.log".format(
             worktree=worktree, home=home, module=mod)
         system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
