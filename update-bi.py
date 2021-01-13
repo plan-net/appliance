@@ -82,7 +82,6 @@ if exists(UPDATE_FILE):
     module = ["setup"]
     module += ["module/" + basename(m) for m in glob(INSTALLED_MODULES)]
     for mod in module:
-        print()
         print(mod)
         cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
               "--state-output=changes state.apply {module} 2>&1 " \
@@ -105,6 +104,7 @@ if exists(UPDATE_FILE):
     cmd = "sudo chown -R {username}:{username} {pnbi}".format(
         username=username, pnbi=pnbi)
     system(cmd)
+    print()
     print("see {home}/salt_call.log".format(home=home))
     print("RUNTIME:", datetime.datetime.now() - t0)
     if error:
