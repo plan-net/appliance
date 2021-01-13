@@ -132,6 +132,9 @@ Install a module of your choice with for example
     bi-installer python38
     # etc.
 
+Please note that the latest version of core4os runs best with Python 3.8. 
+You should install python38 module!
+
 ADDITIONAL NOTES
 ----------------
 
