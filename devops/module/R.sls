@@ -6,6 +6,8 @@ install_R_requirements:
       - ca-certificates
       - software-properties-common
       - gnupg2
+      - libssl-dev
+      - libsasl2-dev
 
 R-repo:
  pkgrepo.managed:
