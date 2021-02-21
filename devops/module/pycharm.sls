@@ -24,11 +24,12 @@ pycharm2020:
     - user: root
     - group: root
 
-/opt/pycharm2018:
-  file.symlink:
-    - name: /opt/pycharm
-    - target: /opt/pycharm-community-2018.3.4
-    - onlyif: test -d /opt/pycharm-community-2018.3.4
+/opt/pycharm:
+  cmd.run:
+    - name: |
+        test -d /opt/pycharm-community-2020.3.3 && ln -s /opt/pycharm-community-2020.3.3 /opt/pycharm && exit
+        test -d /opt/pycharm-community-2018.3.4 && ln -s /opt/pycharm-community-2018.3.4 /opt/pycharm && exit
+    - unless: test -h /opt/pycharm
 
 /usr/local/bin/pycharm:
   file.symlink:
