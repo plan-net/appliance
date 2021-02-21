@@ -1,11 +1,9 @@
-{% set version = "pycharm-community-2018.3.4" %}
-
-pycharm_archive:
+pycharm2018:
   archive:
-    - if_missing: /opt/{{ version }}
+    - if_missing: /opt/pycharm-community-2018.3.4
     - extracted
     - name: /opt/
-    - source: https://download-cf.jetbrains.com/python/{{ version }}.tar.gz
+    - source: https://download-cf.jetbrains.com/python/pycharm-community-2018.3.4.tar.gz
     - source_hash: md5=540081c8118af80422b9e95b5ec44b40
     - archive_format: tar
     - tar_options: z
@@ -13,9 +11,24 @@ pycharm_archive:
     - user: root
     - group: root
 
-/opt/pycharm:
+pycharm2020:
+  archive:
+    - if_missing: /opt/pycharm-community-2020.3.3
+    - extracted
+    - name: /opt/
+    - source: https://download-cf.jetbrains.com/python/pycharm-community-2020.3.3.tar.gz
+    - source_hash: md5=12e20683a01fb7182a029fe1ceeeed95
+    - archive_format: tar
+    - tar_options: z
+    - keep: true
+    - user: root
+    - group: root
+
+/opt/pycharm2018:
   file.symlink:
-    - target: /opt/{{ version }}/
+    - name: /opt/pycharm
+    - target: /opt/pycharm-community-2018.3.4
+    - onlyif: test -d /opt/pycharm-community-2018.3.4
 
 /usr/local/bin/pycharm:
   file.symlink:
