@@ -16,3 +16,9 @@ bi-installer:
     - name: /usr/local/bin/bi-installer
     - mode: 755
     - source: salt://script/bi-installer.sh
+
+bi-update:
+  file.managed:
+    - name: /usr/local/bin/bi-update
+    - mode: 755
+    - source: salt://script/bi-update.sh
