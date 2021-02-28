@@ -90,8 +90,8 @@ cleanup_hosts_2:
         10.249.240.220  mongodb.test
         10.249.240.172  worker1.test
         10.249.240.80   worker2.test
-        10.249.240.224  app1.test
-        10.249.240.102  app2.test
+        10.249.240.64  app1.test
+        10.249.240.52  app2.test
         10.249.240.16   proxy.test
 
     - show_changes: True
