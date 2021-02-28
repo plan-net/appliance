@@ -78,9 +78,20 @@ cleanup_hosts_2:
         10.249.1.98     pnbi_ipython ipython-server ipython-srv
 
         # jupyter
-        10.249.1.147 jupyter.spm  # jupyterhub IN spm
+        10.249.1.147    jupyter.spm  # jupyterhub IN spm
 
         # salt (core4)
         10.249.1.100    salt.spm
+
+        # aws test enironment
+
+        10.249.240.204  salt.test
+        10.249.240.233  file.test
+        10.249.240.220  mongodb.test
+        10.249.240.172  worker1.test
+        10.249.240.80   worker2.test
+        10.249.240.224  app1.test
+        10.249.240.102  app2.test
+        10.249.240.16   proxy.test
 
     - show_changes: True
