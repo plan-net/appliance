@@ -44,19 +44,7 @@ cleanup_ssh_config_2:
         Host bi-worker*
             ProxyCommand ssh -W %h:%p brandinvestor.bi.plan-net.com
 
-        Host *.aws
-            ProxyCommand ssh -W %h:%p 35.158.149.95
-
-        Host *.stage
-            ProxyCommand ssh -W %h:%p salt.spm
-
-        Host *.staging
-            ProxyCommand ssh -W %h:%p salt.spm
-
         Host !salt.spm *.spm
-            ProxyCommand ssh -W %h:%p salt.spm
-
-        Host *.test
             ProxyCommand ssh -W %h:%p salt.spm
 
     - show_changes: True
