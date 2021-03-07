@@ -63,6 +63,7 @@ cleanup_hosts_2:
         10.249.1.154    pnbi_staging_proxyExt staging_proxyExt staging.bi.plan-net.com
 
         # core4 staging
+        10.249.1.191 salt.staging
         10.249.2.30 proxy.staging
         10.249.1.160 app1.staging
         10.249.1.161 worker1.staging
