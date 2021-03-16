@@ -42,5 +42,5 @@ python3.8_link:
     - name: |
         rm /usr/bin/python3
         ln -s /usr/local/bin/python3.8 /usr/bin/python3
-        rm /usr/bin/lsb_release
+        test -f /usr/bin/lsb_release && rm /usr/bin/lsb_release
     - unless: test "$(readlink -f /usr/bin/python3)" = "/usr/local/bin/python3.8"
