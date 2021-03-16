@@ -44,7 +44,7 @@ https://tecadmin.net/install-virtualbox-debian-9-stretch/.
 
 #### prerequisites
 
-    su -s
+    su -
     apt-get update
     apt-get upgrade
 
