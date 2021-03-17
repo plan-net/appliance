@@ -135,6 +135,11 @@ Install a module of your choice with for example
 Please note that the latest version of core4os runs best with Python 3.8. 
 You should install python38 module!
 
+Continue core4os installation as describe at https://github.com/plan-net/core4.
+Note that the appliance you just installed delivers most prerequisites so that
+you can directly [start here](https://github.com/plan-net/core4#core4os-installation-backend-only).
+
+
 ADDITIONAL NOTES
 ----------------
 
