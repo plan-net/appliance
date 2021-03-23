@@ -31,6 +31,11 @@ extra_packages:
       - build-essential
       - python-dev
       - libpq-dev
+      - dirmngr
+      - apt-transport-https
+      - ca-certificates
+      - software-properties-common
+      - gnupg2
 
 fortran_base:
   pkg.installed:
@@ -110,3 +115,13 @@ virtualenvwrapper_zshrc:
         mkdir -p $WORKON_HOME
         source /usr/local/bin/virtualenvwrapper.sh
     - show_changes: True
+
+add_apt_repository_35:
+  cmd.run:
+    - name: |
+        echo "#! /usr/bin/python3.5\n`tail +2 /usr/bin/add-apt-repository`" > /usr/bin/add-apt-repository
+    - unless: head -n 1 /usr/bin/add-apt-repository | grep python3.5
+    - require:
+        - pkgrepo: R-repo
+
+
