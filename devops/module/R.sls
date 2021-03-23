@@ -1,14 +1,3 @@
-install_R_requirements:
-  pkg.installed:
-    - pkgs:
-      - dirmngr
-      - apt-transport-https
-      - ca-certificates
-      - software-properties-common
-      - gnupg2
-      - libssl-dev
-      - libsasl2-dev
-
 R-repo:
  pkgrepo.managed:
    - humanname: R
