@@ -89,10 +89,15 @@ fortran_base:
 python-pip:
   pkg.installed
 
+pbr:
+  pip.installed:
+    - require:
+        - pkg: python-pip
+
 virtualenvwrapper:
   pip.installed:
     - require:
-      - pkg: python-pip
+      - pip: pbr
 
 virtualenvwrapper_zshrc:
   file.blockreplace:

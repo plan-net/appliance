@@ -143,7 +143,7 @@ the update with touch ```~/.pnbi_salt/.upgrade```.
 
 For testing purposes you can pass a branch to ```bootstrap-bi.sh```. The 
 default branch is _master2_. To switch for example to develop, run
-```bash bootstrap-bi.sh develop```. Please note, that automatic updates 
+```bash bootstrap-bi.sh develop2```. Please note, that automatic updates 
 are working with this branch. You will have to switch back to master manually
 by running the ```bootstrap-bi.sh``` script again or by checking out to master
 manually in  ```git -C ~/.pnbi_salt/appliance checkout master```.
