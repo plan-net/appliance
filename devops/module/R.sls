@@ -1,20 +1,3 @@
-install_R_requirements:
-  pkg.installed:
-    - pkgs:
-      - dirmngr
-      - apt-transport-https
-      - ca-certificates
-      - software-properties-common
-      - gnupg2
-
-add_apt_repository_35:
-  cmd.run:
-    - name: |
-        echo "#! /usr/bin/python3.5\n`tail +2 /usr/bin/add-apt-repository`" > /usr/bin/add-apt-repository
-    - unless: head -n 1 /usr/bin/add-apt-repository | grep python3.5
-    - require:
-        - pkgrepo: R-repo
-
 R-repo:
  pkgrepo.managed:
    - humanname: R
