@@ -1,11 +1,5 @@
 {% set username = salt['environ.get']('SUDO_USER') or salt['environ.get']('USERNAME') %}
 
-install_python38_requirements:
-  pkg.installed:
-    - pkgs:
-      - ssh-askpass-gnome 
-      - ssh-askpass
-
 vscode_zshrc:
   file.blockreplace:
     - name: /home/{{ username }}/.zshrc

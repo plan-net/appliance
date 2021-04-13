@@ -61,3 +61,10 @@ yarn:
     - creates: /usr/bin/yarn
     - require:
       - cmd: nodejs
+
+askpass:
+  pkg.installed:
+    - pkgs:
+        - ssh-askpass-gnome
+        - ssh-askpass
+
