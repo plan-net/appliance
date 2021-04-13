@@ -75,6 +75,5 @@ askpass_zshrc:
     - marker_end: "# end of askpasss"
     - append_if_not_found: True
     - content: |
-    - show_changes: True
         export SSH_ASKPASS=/usr/bin/ssh-askpass
-
+    - show_changes: True
