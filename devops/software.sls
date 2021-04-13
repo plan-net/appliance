@@ -68,6 +68,8 @@ askpass:
         - ssh-askpass-gnome
         - ssh-askpass
 
+{% set username = salt['environ.get']('SUDO_USER') or salt['environ.get']('USERNAME') %}
+
 askpass_zshrc:
   file.blockreplace:
     - name: /home/{{ username }}/.zshrc
