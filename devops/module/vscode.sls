@@ -7,8 +7,8 @@ vscode_zshrc:
     - marker_end: "# end of visual studio code"
     - append_if_not_found: True
     - content: |
+        # export SSH_ASKPASS=/usr/bin/ssh-askpass
     - show_changes: True
-        export SSH_ASKPASS=/usr/bin/ssh-askpass
 
 vscode:
   cmd.run:

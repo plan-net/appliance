@@ -68,3 +68,13 @@ askpass:
         - ssh-askpass-gnome
         - ssh-askpass
 
+askpass_zshrc:
+  file.blockreplace:
+    - name: /home/{{ username }}/.zshrc
+    - marker_start: "# begin of askpass -DO-NOT-EDIT-"
+    - marker_end: "# end of askpasss"
+    - append_if_not_found: True
+    - content: |
+    - show_changes: True
+        export SSH_ASKPASS=/usr/bin/ssh-askpass
+
