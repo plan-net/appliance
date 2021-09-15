@@ -91,18 +91,13 @@ fortran_base:
     - contents: |
         i would like to be a chicken
 
-python-pip:
-  pkg.installed
-
-pbr:
-  pip.installed:
-    - require:
-        - pkg: python-pip
-
 virtualenvwrapper:
-  pip.installed:
-    - require:
-      - pip: pbr
+  cmd.run:
+    - name: |
+        apt install python-pip
+        /usr/bin/pip install pbr
+        /usr/bin/pip install virtualenvwrapper
+    - creates: /usr/local/lib/python2.7/dist-packages/virtualenvwrapper
 
 virtualenvwrapper_zshrc:
   file.blockreplace:
@@ -129,5 +124,3 @@ apt_listchanges_35:
         echo "#! /usr/bin/python3.5
         `tail +2 /usr/bin/apt-listchanges`" > /usr/bin/apt-listchanges
     - unless: head -n 1 /usr/bin/apt-listchanges | grep python3.5
-
-
