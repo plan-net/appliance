@@ -10,5 +10,6 @@ include:
   - .desktop
   - .powerlevel9k
   - .zsh
+  - .askpass
   - .core4
   - .core3
