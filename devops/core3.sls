@@ -94,7 +94,7 @@ fortran_base:
 virtualenvwrapper:
   cmd.run:
     - name: |
-        apt install python-pip
+        apt --yes install python-pip
         /usr/bin/pip install pbr
         /usr/bin/pip install virtualenvwrapper
     - creates: /usr/local/lib/python2.7/dist-packages/virtualenvwrapper
