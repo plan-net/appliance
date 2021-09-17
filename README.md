@@ -144,7 +144,7 @@ ADDITIONAL NOTES
 ----------------
 
 The Plan.Net BI appliance ships with an automated update. You can enforce 
-the update with touch ```~/.pnbi_salt/.upgrade```.
+the update with ```touch ~/.pnbi_salt/.upgrade```.
 
 For testing purposes you can pass a branch to ```bootstrap-bi.sh```. The 
 default branch is _master2_. To switch for example to develop, run
