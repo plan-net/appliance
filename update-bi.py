@@ -76,7 +76,6 @@ if exists(UPDATE_FILE):
     check_call(["git", "pull"])
     print("run upgrade")
     cmd = "sudo truncate --size 0 {home}/salt_call.log".format(home=home)
-    system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
     module = ["setup"]
@@ -86,7 +85,7 @@ if exists(UPDATE_FILE):
         print("*" * 80)
         print("***", mod)
         print("*" * 80, "\n")
-        cmd = "sudo salt-call --file-root {worktree}/devops -l info --local " \
+        cmd = "sudo ./salt-call --file-root {worktree}/devops -l info --local " \
               "--state-output=changes state.apply {module} 2>&1 " \
               "| tee -a {home}/salt_call.log 2>&1".format(
             worktree=worktree, home=home, module=mod)
