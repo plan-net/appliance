@@ -26,5 +26,5 @@ if [ ! -f $MODULE ]; then
   exit
 fi
 
-salt-call --file-root $ROOT -l info --local --state-output=changes state.apply $STATE
+./salt-call --file-root $ROOT -l info --local --state-output=changes state.apply $STATE
 touch $FLAG
