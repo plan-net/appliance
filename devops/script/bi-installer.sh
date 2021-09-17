@@ -9,6 +9,7 @@ if (( $EUID != 0 )); then
 fi
 
 SALT="/home/$SUDO_USER/.pnbi_salt"
+SALTCALL="$SALT/appliance/salt-call"
 ROOT="$SALT/appliance/devops"
 AVAILABLE="$ROOT/module"
 MODULE="$AVAILABLE/$*.sls"
@@ -26,5 +27,5 @@ if [ ! -f $MODULE ]; then
   exit
 fi
 
-./salt-call --file-root $ROOT -l info --local --state-output=changes state.apply $STATE
+$SALTCALL --file-root $ROOT -l info --local --state-output=changes state.apply $STATE
 touch $FLAG
