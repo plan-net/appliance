@@ -56,26 +56,17 @@ yarn:
     - name: |
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
         echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-        apt update
-        apt install yarn
+        apt --yes update
+        apt --yes install yarn
     - creates: /usr/bin/yarn
     - require:
       - cmd: nodejs
 
-askpass:
-  pkg.installed:
-    - pkgs:
-        - ssh-askpass-gnome
-        - ssh-askpass
-
-{% set username = salt['environ.get']('SUDO_USER') or salt['environ.get']('USERNAME') %}
-
-askpass_zshrc:
-  file.blockreplace:
-    - name: /home/{{ username }}/.zshrc
-    - marker_start: "# begin of askpass -DO-NOT-EDIT-"
-    - marker_end: "# end of askpasss"
-    - append_if_not_found: True
-    - content: |
-        export SSH_ASKPASS=/usr/bin/ssh-askpass
-    - show_changes: True
+github:
+  cmd.run:
+    - name: |
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+        apt --yes update
+        apt --yes install gh
+    - creates: /etc/apt/sources.list.d/github-cli.list

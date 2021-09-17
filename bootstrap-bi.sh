@@ -45,7 +45,7 @@ printf "${HL}
   \__,_| .__/| .__/|_|_|\__,_|_| |_|\___\___|
        |_|   |_|
 
-VERSION 2.0${NC} as $USER in $USERHOME
+VERSION 2.1${NC} as $USER in $USERHOME
 
 This script will setup your Debian virtualbox (appliance branch $BRANCH)
 
