@@ -76,6 +76,7 @@ if exists(UPDATE_FILE):
     check_call(["git", "pull"])
     print("run upgrade")
     cmd = "sudo truncate --size 0 {home}/salt_call.log".format(home=home)
+    system(cmd)
     cmd = "sudo chmod 777 {home}/salt_call.log".format(home=home)
     system(cmd)
     module = ["setup"]
