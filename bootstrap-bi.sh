@@ -5,7 +5,7 @@
 
 if (( $EUID != 0 )); then
     echo "restarting as root, please enter your password ..."
-    su -l -c "export AUTO=1; cd $PWD; /bin/bash $0 $*"
+    su -c "export AUTO=1; cd $PWD; /bin/bash $0 $*"
     exit
 fi
 
