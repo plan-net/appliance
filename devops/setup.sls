@@ -1,3 +1,10 @@
+salt-repo:
+ pkgrepo.managed:
+   - humanname: salt
+   - name: deb https://repo.saltproject.io/py3/debian/9/amd64/archive/3003.4 stretch main
+   - file: /etc/apt/sources.list.d/salt.list
+   - refresh_db: True
+
 include:
   - .software
   - .users
