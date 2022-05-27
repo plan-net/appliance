@@ -79,7 +79,7 @@ cd "$USERHOME/.pnbi_salt"
 if ! [ -x "$(command -v salt-minion)" ]; then
     echo "installing saltstack"
     wget -O bootstrap-salt.sh https://bootstrap.saltstack.com
-    sh bootstrap-salt.sh -X stable 3003.3
+    sh bootstrap-salt.sh -X stable 3003
 fi
 
 if ! [ -x "$(command -v git)" ]; then
