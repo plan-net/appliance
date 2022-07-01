@@ -2,7 +2,7 @@ system_prerequisites:
   pkg.installed:
     - refresh: True
     - pkgs:
-      - linux-headers-amd64
+      - linux-headers-arm64
       - gcc
       - make
       - perl
@@ -23,7 +23,8 @@ system_prerequisites:
       #- python3-dev
       #- python-dev
       - build-essential
-      - libappindicator3-1
+      #todo: check if this is correct
+      - libappindicator3-0.1-cil
       - meld
       - python-tk
       - libcanberra-gtk-module

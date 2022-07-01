@@ -22,7 +22,7 @@ fi
 USERHOME="/home/$USER"
 
 if [[ $# -eq 0 ]] ; then
-    BRANCH="master2"
+    BRANCH="bzi.arm64"
 else
     BRANCH="$1"
 fi
