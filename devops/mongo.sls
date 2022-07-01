@@ -1,5 +1,7 @@
 {% set version = "mongodb-linux-x86_64-debian92-4.0.13" %}
 
+https://fastdl.mongodb.org/linux/mongodb-shell-linux-x86_64-debian11-5.0.9.tgz
+
 mongo_group:
   group.present:
     - name: mongo
@@ -20,7 +22,7 @@ mongo:
     - makedirs: True
 
 /srv/mongodb/data:
-  file.directory:
+  file.directory:w
     - user: mongo
     - group: root
     - mode: 770

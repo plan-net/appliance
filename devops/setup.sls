@@ -1,12 +1,12 @@
 include:
   - .software
   - .users
-  - .robo3t
+  # - .robo3t
   - .postman
   - .hosts
   - .ssh
   - .salt
-  - .mongo
+  # - .mongo
   - .desktop
   - .powerlevel9k
   - .zsh
