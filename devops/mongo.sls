@@ -43,13 +43,13 @@ mongo_build:
         wget -c https://fastdl.mongodb.org/src/{{ version }}.tar.gz
         tar xzf {{ version }}.tar.gz
         cd mongodb-src-r4.4.15
-        ./python3 buildscripts/scons.py install-mongod --disable-warnings-as-errors CCFLAGS="-march=armv8-a+crc"
+        python3 buildscripts/scons.py install-mongod --disable-warnings-as-errors CCFLAGS="-march=armv8-a+crc"
         cd build/opt/mongo
         cp mongod /srv/{{ version }}/bin/
     - cwd: /tmp
     - shell: /bin/bash
     - timeout: 300
-    - unless: test -x /tmp/install/mongodb-src-r4.4.15/build/opt/mongo/mongod
+    - unless: test -x /tmp/install/{{ version }}/build/opt/mongo/mongod
 
 /srv/mongodb/bin:
   file.symlink:
