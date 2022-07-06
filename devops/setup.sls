@@ -6,7 +6,7 @@ include:
   - .hosts
   - .ssh
   - .salt
-  # - .mongo
+  - .mongo
   - .desktop
   - .powerlevel9k
   - .zsh

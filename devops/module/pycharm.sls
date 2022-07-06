@@ -24,11 +24,26 @@ pycharm2020:
     - user: root
     - group: root
 
+pycharm2022:
+  archive:
+    - if_missing: /opt/pycharm-community-2022.1.3
+    - extracted
+    - name: /opt/
+    - source: https://download.jetbrains.com/python/pycharm-community-2022.1.3.tar.gz
+    - source_hash: sha256=888595caa9510d31fd1b56009b6346fd705e8e7cd36d07205f8bf510b92f26a5
+    - archive_format: tar
+    - tar_options: z
+    - keep: true
+    - user: root
+    - group: root
+
 /opt/pycharm:
   cmd.run:
     - name: |
+        test -d /opt/pycharm-community-2022.1.3 && ln -s /opt/pycharm-community-2022.1.3 /opt/pycharm && exit
         test -d /opt/pycharm-community-2020.3.3 && ln -s /opt/pycharm-community-2020.3.3 /opt/pycharm && exit
         test -d /opt/pycharm-community-2018.3.4 && ln -s /opt/pycharm-community-2018.3.4 /opt/pycharm && exit
+
     - unless: test -h /opt/pycharm
 
 /usr/local/bin/pycharm:

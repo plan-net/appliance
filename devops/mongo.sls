@@ -1,4 +1,4 @@
-{% set version = "mongodb-linux-x86_64-debian92-4.0.13" %}
+{% set version = "mongodb-src-r4.4.15" %}
 
 https://fastdl.mongodb.org/linux/mongodb-shell-linux-x86_64-debian11-5.0.9.tgz
 
@@ -35,6 +35,7 @@ mongo:
     - mode: 755
     - makedirs: True
 
+{#
 mongo_archive:
   archive:
     - if_missing: /srv/{{ version }}
@@ -47,6 +48,42 @@ mongo_archive:
     - keep: false
     - user: root
     - group: root
+#}
+
+
+mongo__build:
+  cmd.run:
+    - name: |
+        cd /tmp
+        mkdir install
+        cd install
+        wget -c https://fastdl.mongodb.org/src/{{ version }}.tar.gz
+        tar xzf {{ version }}.tar.gz
+        cd mongodb-src-r4.4.15
+        ./python3 buildscripts/scons.py install-mongod --disable-warnings-as-errors CCFLAGS="-march=armv8-a+crc"
+        cd build/opt/mongo
+        cp mongod /srv/{{ version }}/bin/
+    - cwd: /tmp
+    - shell: /bin/bash
+    - timeout: 300
+    - unless: test -x /tmp/install/mongodb-src-r4.4.15/build/opt/mongo/mongod
+
+
+
+install-foo:
+  cmd.run:
+    - name: |
+        cd /tmp
+        wget -c http://example.com/foo-3.4.3.tar.gz
+        tar xzf foo-3.4.3.tar.gz
+        cd foo-3.4.3
+        ./configure --prefix=/usr/local
+        make
+        make install
+    - cwd: /tmp
+    - shell: /bin/bash
+    - timeout: 300
+    - unless: test -x /usr/local/bin/foo
 
 /srv/mongodb/bin:
   file.symlink:
