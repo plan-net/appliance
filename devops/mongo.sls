@@ -1,7 +1,5 @@
 {% set version = "mongodb-src-r4.4.15" %}
 
-https://fastdl.mongodb.org/linux/mongodb-shell-linux-x86_64-debian11-5.0.9.tgz
-
 mongo_group:
   group.present:
     - name: mongo
@@ -35,23 +33,8 @@ mongo:
     - mode: 755
     - makedirs: True
 
-{#
-mongo_archive:
-  archive:
-    - if_missing: /srv/{{ version }}
-    - extracted
-    - name: /srv/
-    - source: https://fastdl.mongodb.org/linux/{{ version }}.tgz
-    - source_hash: md5=66905685ed6859c2fbe70de562917e7d
-    - archive_format: tar
-    - tar_options: z
-    - keep: false
-    - user: root
-    - group: root
-#}
 
-
-mongo__build:
+mongo_build:
   cmd.run:
     - name: |
         cd /tmp
@@ -67,23 +50,6 @@ mongo__build:
     - shell: /bin/bash
     - timeout: 300
     - unless: test -x /tmp/install/mongodb-src-r4.4.15/build/opt/mongo/mongod
-
-
-
-install-foo:
-  cmd.run:
-    - name: |
-        cd /tmp
-        wget -c http://example.com/foo-3.4.3.tar.gz
-        tar xzf foo-3.4.3.tar.gz
-        cd foo-3.4.3
-        ./configure --prefix=/usr/local
-        make
-        make install
-    - cwd: /tmp
-    - shell: /bin/bash
-    - timeout: 300
-    - unless: test -x /usr/local/bin/foo
 
 /srv/mongodb/bin:
   file.symlink:
