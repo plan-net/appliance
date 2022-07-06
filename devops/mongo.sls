@@ -1,6 +1,5 @@
 {% set version = "mongodb-src-r4.4.15" %}
 
-
 mongo_group:
   group.present:
     - name: mongo
@@ -21,7 +20,7 @@ mongo:
     - makedirs: True
 
 /srv/mongodb/data:
-  file.directory:w
+  file.directory:
     - user: mongo
     - group: root
     - mode: 770
